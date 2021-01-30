@@ -1,5 +1,5 @@
 ### STAGE 1: Build ###
-FROM node:14.15.4-alpine3.1O AS build
+FROM node:lts-apline AS build
 WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
 RUN npm install
