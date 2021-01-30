@@ -21,6 +21,7 @@ pipeline {
       steps { sh 'npm run-script build' }
     }
     stage('Deploy') {
+      agent none
       steps { sh 'docker-compose up --build -d'}
     }
   }
