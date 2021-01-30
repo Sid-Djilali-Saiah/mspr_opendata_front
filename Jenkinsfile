@@ -2,6 +2,7 @@ pipeline {
   agent {
     docker { image 'node:lts-alpine' }
   }
+  environment { HOME="." }
   stages {
     stage('Install') {
       steps { sh 'npm install' }
