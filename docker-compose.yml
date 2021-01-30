@@ -1,0 +1,8 @@
+version: 3.6
+
+services:
+  frontend:
+    container_name: mspr-reciepe-frontend
+    build: .
+    ports:
+    - '4242:4200'
