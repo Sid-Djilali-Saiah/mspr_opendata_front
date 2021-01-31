@@ -9,13 +9,14 @@ pipeline {
       steps { sh 'npm install' }
     }
     stage('Test') {
-      agent { label 'test-container' }
       parallel {
         stage('Static code analysis') {
+            agent { label 'test-container' }
             steps { sh 'npm run-script lint' }
         }
         stage('Unit tests') {
-            steps { sh 'npm run-script test' }
+           agent { label 'test-container' }  
+           steps { sh 'npm run-script test' }
         }
       }
     }
