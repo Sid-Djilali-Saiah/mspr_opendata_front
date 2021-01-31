@@ -20,10 +20,9 @@ pipeline {
     stage('Build') {
       steps { sh 'npm run-script build' }
     }
-  }
-  post {
-    success {
-      sh 'docker-compose up --build -d'
+    stage('Deploy') {
+      agent any
+      steps { sh 'docker-compose up --build -d'}
     }
   }
 }
