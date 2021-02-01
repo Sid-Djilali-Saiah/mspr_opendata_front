@@ -7,8 +7,8 @@
     "build": "ng build",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "lint": "tsc --noEmit && eslint . --ext js,ts,json",
-    "format": "prettier src/**/*.ts --write",
+    "lint": "ng lint",
+    "format": "npx pretty-quick --staged",
     "e2e": "ng e2e"
   },
   "private": true,
@@ -21,8 +21,11 @@
     "@angular/platform-browser": "~11.0.0",
     "@angular/platform-browser-dynamic": "~11.0.0",
     "@angular/router": "~11.0.0",
+    "pretty-quick": "^3.1.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-etc": "^1.13.9",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
@@ -32,7 +35,7 @@
     "@types/jest": "^26.0.20",
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "^4.14.1",
-    "codelyzer": "^6.0.0",
+    "codelyzer": "^6.0.1",
     "eslint": "^7.18.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^3.3.1",
@@ -53,7 +56,7 @@
         "npm run lint"
       ],
       "pre-push": [
-        "npm run format"
+        "npm run test && npm run build"
       ]
     }
   },
@@ -72,5 +75,5 @@
         "stringifyContentPathRegex": "\\.html$"
       }
     }
-}
+  }
 }
