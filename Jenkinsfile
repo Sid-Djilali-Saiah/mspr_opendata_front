@@ -16,13 +16,13 @@ pipeline {
     stage('Build') {
       steps { sh 'npm run-script build' }
     }
-    stage('Build') {
-            steps {
-                def scannerHome = tool 'SonarScanner'
-                withSonarQubeEnv('SonarQube') {
-                    sh "${scannerHome}/bin/sonar-scanner"
-                }
-            }
-        }
+    stage('Code Quality') {
+      steps {
+          def scannerHome = tool 'SonarScanner'
+          withSonarQubeEnv('SonarQube') {
+              sh "${scannerHome}/bin/sonar-scanner"
+          }
+      }
+    }
   }
 }
