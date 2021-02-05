@@ -22,7 +22,7 @@ pipeline {
     }
     stage('sonarqube') {
       steps {
-        withSonarQubeEnv() {
+        withSonarQubeEnv('sonar-scanner') {
           sh '${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=mspr_front -Dsonar.sources=. -Dsonar.host.url=https://sonarqube.nonstopintegration.ml -Dsonar.login=db7b3274067b4323f4e690899dd011d6b6c762b4'
         }
       }
