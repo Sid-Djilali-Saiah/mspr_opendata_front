@@ -7,28 +7,17 @@ pipeline {
     stage('Install') {
       steps { sh 'npm install' }
     }
-    stage('Test') {
-      parallel {
-        stage('Static code analysis') {
-            steps { sh 'npm run-script lint' }
-        }
-        stage('Unit tests') {
-            steps { sh 'npm run-script test' }
-        }
-      }
+    stage('Static code Analysis') {
+      steps { sh 'npm run-script lint' }
+    }
+    stage('Unit tests') {
+      steps { sh 'npm run-script test' }
     }
     stage('Build') {
       steps { sh 'npm run-script build' }
     }
-    stage('sonarqube') {
-      environment {
-        scannerHome = tool 'Sonarqube Scanner'
-      }
-      steps {
-        withSonarQubeEnv('Sonarqube Scanner') {
-          sh '${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=mspr_front -Dsonar.sources=. -Dsonar.host.url=https://sonarqube.nonstopintegration.ml -Dsonar.login=db7b3274067b4323f4e690899dd011d6b6c762b4'
-        }
-      }
+    stage('Code Quality') {
+      steps { sh 'npm run-script sonar' }
     }
   }
 }

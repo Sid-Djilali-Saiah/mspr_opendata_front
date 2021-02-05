@@ -1,0 +1,6 @@
+projectKey=mspr_front
+serverUrl=https://sonarqube.nonstopintegration.ml
+serverVersion=7.9.5.38598
+dashboardUrl=https://sonarqube.nonstopintegration.ml/dashboard?id=mspr_front
+ceTaskId=AXdx6lyMHCfDNj1hTAXC
+ceTaskUrl=https://sonarqube.nonstopintegration.ml/api/ce/task?id=AXdx6lyMHCfDNj1hTAXC

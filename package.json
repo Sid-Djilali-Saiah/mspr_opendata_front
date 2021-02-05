@@ -9,6 +9,7 @@
     "test:coverage": "jest --coverage",
     "lint": "ng lint",
     "format": "npx pretty-quick --staged",
+    "sonar": "npx sonar-scanner",
     "e2e": "ng e2e"
   },
   "private": true,
@@ -39,6 +40,7 @@
     "prettier": "^2.2.1",
     "pretty-quick": "^3.1.0",
     "protractor": "~7.0.0",
+    "sonar-scanner": "^3.1.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "tslint-config-prettier": "^1.18.0",
