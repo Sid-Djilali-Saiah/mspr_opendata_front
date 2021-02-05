@@ -21,8 +21,8 @@ pipeline {
       steps { sh 'npm run-script build' }
     }
     stage('sonarqube') {
+      def scannerHome = tool 'sonar';
       steps {
-        def scannerHome = tool 'sonar';
         withSonarQubeEnv('Sonarqube Scanner') {
           sh '${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=mspr_front -Dsonar.sources=. -Dsonar.host.url=https://sonarqube.nonstopintegration.ml -Dsonar.login=db7b3274067b4323f4e690899dd011d6b6c762b4'
         }
