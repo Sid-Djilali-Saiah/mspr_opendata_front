@@ -16,8 +16,13 @@ pipeline {
     stage('Build') {
       steps { sh 'npm run-script build' }
     }
-    stage('Code Quality') {
-      steps { sh 'npm run-script sonar' }
-    }
+    stage('Build') {
+            steps {
+                def scannerHome = tool 'SonarScanner'
+                withSonarQubeEnv('SonarQube') {
+                    sh "${scannerHome}/bin/sonar-scanner"
+                }
+            }
+        }
   }
 }
