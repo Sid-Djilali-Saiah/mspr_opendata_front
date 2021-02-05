@@ -18,11 +18,11 @@ pipeline {
     }
     stage('Code Quality') {
       steps {
-          def scannerHome = tool 'SonarScanner'
-          withSonarQubeEnv('SonarQube') {
-              sh "${scannerHome}/bin/sonar-scanner"
-          }
+        def scannerHome = tool 'SonarScanner'
+        withSonarQubeEnv('SonarQube') {
+          sh "${scannerHome}/bin/sonar-scanner"
+        }
       }
     }
   }
-}
+} 
