@@ -13,7 +13,6 @@ pipeline {
     stage('Unit tests') {
       steps { sh 'npm run test' }
     }
-    stage('Code Quality Gate') {
       node {
         stage('SCM') {
           git 'https://github.com/Nicolas-Chambon/mspr_recipe_front'
@@ -25,7 +24,7 @@ pipeline {
           }
         }
       }
-    }
+
     stage('Build') {
       steps { sh 'npm run build' }
     }
