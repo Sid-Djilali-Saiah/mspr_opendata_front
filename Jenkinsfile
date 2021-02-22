@@ -22,7 +22,7 @@ pipeline {
       steps { sh 'npm run lint' }
     }
     stage('Unit tests') {
-      steps { sh 'npm run test' }
+      steps { sh 'npm run test:ci' }
     }
     stage('Build') {
       steps { sh 'npm run build' }

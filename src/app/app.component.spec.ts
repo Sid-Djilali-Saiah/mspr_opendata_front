@@ -13,7 +13,7 @@ describe('AppComponent', () => {
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app).toBeNull();
+    expect(app).toBeTruthy();
   });
 
   it(`should have as title 'mspr-recipe-front'`, () => {

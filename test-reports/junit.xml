@@ -1,30 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="4" failures="1" errors="0" time="5.776">
-  <testsuite name="AppRoutingModule" errors="0" failures="0" skipped="0" timestamp="2021-02-22T13:37:37" time="1.558" tests="1">
-    <testcase classname="AppRoutingModule should create an instance" name="AppRoutingModule should create an instance" time="0.003">
+<testsuites name="jest tests" tests="4" failures="0" errors="0" time="3.655">
+  <testsuite name="AppRoutingModule" errors="0" failures="0" skipped="0" timestamp="2021-02-22T14:25:23" time="1.583" tests="1">
+    <testcase classname="AppRoutingModule should create an instance" name="AppRoutingModule should create an instance" time="0.004">
     </testcase>
   </testsuite>
-  <testsuite name="AppComponent" errors="0" failures="1" skipped="0" timestamp="2021-02-22T13:37:37" time="4.431" tests="3">
-    <testcase classname="AppComponent should create the app" name="AppComponent should create the app" time="0.295">
-      <failure>Error: expect(received).toBeNull()
-
-Received: {&quot;title&quot;: &quot;mspr-recipe-front&quot;}
-    at /home/epsi/Projects/mspr_recipe_front/src/app/app.component.spec.ts:16:17
-    at ZoneDelegate.Object.&lt;anonymous&gt;.ZoneDelegate.invoke (/home/epsi/Projects/mspr_recipe_front/node_modules/zone.js/dist/zone.js:386:30)
-    at ProxyZoneSpec.Object.&lt;anonymous&gt;.ProxyZoneSpec.onInvoke (/home/epsi/Projects/mspr_recipe_front/node_modules/zone.js/dist/proxy.js:117:43)
-    at ZoneDelegate.Object.&lt;anonymous&gt;.ZoneDelegate.invoke (/home/epsi/Projects/mspr_recipe_front/node_modules/zone.js/dist/zone.js:385:36)
-    at Zone.Object.&lt;anonymous&gt;.Zone.run (/home/epsi/Projects/mspr_recipe_front/node_modules/zone.js/dist/zone.js:143:47)
-    at Object.wrappedFunc (/home/epsi/Projects/mspr_recipe_front/node_modules/jest-preset-angular/build/zone-patch/index.js:40:30)
-    at Object.asyncJestTest (/home/epsi/Projects/mspr_recipe_front/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /home/epsi/Projects/mspr_recipe_front/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/home/epsi/Projects/mspr_recipe_front/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /home/epsi/Projects/mspr_recipe_front/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)</failure>
+  <testsuite name="AppComponent" errors="0" failures="0" skipped="0" timestamp="2021-02-22T14:25:23" time="2.257" tests="3">
+    <testcase classname="AppComponent should create the app" name="AppComponent should create the app" time="0.348">
     </testcase>
-    <testcase classname="AppComponent should have as title &apos;mspr-recipe-front&apos;" name="AppComponent should have as title &apos;mspr-recipe-front&apos;" time="0.181">
+    <testcase classname="AppComponent should have as title &apos;mspr-recipe-front&apos;" name="AppComponent should have as title &apos;mspr-recipe-front&apos;" time="0.199">
     </testcase>
-    <testcase classname="AppComponent should render title" name="AppComponent should render title" time="0.128">
+    <testcase classname="AppComponent should render title" name="AppComponent should render title" time="0.142">
     </testcase>
   </testsuite>
 </testsuites>
