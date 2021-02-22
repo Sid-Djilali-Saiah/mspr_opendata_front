@@ -11,7 +11,7 @@
     "test:watch": "ng test --watch",
     "lint": "ng lint",
     "format": "npx pretty-quick --staged",
-    "sonar": "sonar-scanner",
+    "sonar": "npx sonar-scanner",
     "e2e": "ng e2e"
   },
   "private": true,
