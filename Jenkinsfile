@@ -5,24 +5,19 @@ pipeline {
   environment { HOME="." }
   stages {
     stage('Install') {
-      steps { sh 'npm install' }
+      steps { sh 'npm ci && npm i -g sonar-scanner' }
     }
     stage('Static code Analysis') {
-      steps { sh 'npm run-script lint' }
+      steps { sh 'npm run lint' }
     }
     stage('Unit tests') {
-      steps { sh 'npm run-script test' }
-    }
-    stage('Build') {
-      steps { sh 'npm run-script build' }
+      steps { sh 'npm run test' }
     }
     stage('Code Quality') {
-      steps {
-        def scannerHome = tool 'SonarScanner'
-        withSonarQubeEnv('SonarQube') {
-          sh "${scannerHome}/bin/sonar-scanner"
-        }
-      }
+      steps { sh "npm run sonar" }
+    }
+    stage('Build') {
+      steps { sh 'npm run build' }
     }
   }
-} 
+}

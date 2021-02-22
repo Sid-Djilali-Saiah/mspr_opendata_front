@@ -5,8 +5,10 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "jest",
-    "test:coverage": "jest --coverage",
+    "test": "ng test",
+    "test:ci": "ng test --ci",
+    "test:update": "ng test -u",
+    "test:watch": "ng test --watch",
     "lint": "ng lint",
     "format": "npx pretty-quick --staged",
     "sonar": "sonar-scanner",
@@ -15,10 +17,12 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~11.0.0",
+    "@angular/cdk": "^11.2.1",
     "@angular/common": "~11.0.0",
     "@angular/compiler": "~11.0.0",
     "@angular/core": "~11.0.0",
     "@angular/forms": "~11.0.0",
+    "@angular/material": "^11.2.1",
     "@angular/platform-browser": "~11.0.0",
     "@angular/platform-browser-dynamic": "~11.0.0",
     "@angular/router": "~11.0.0",
@@ -27,6 +31,7 @@
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
+    "@angular-builders/jest": "^11.0.0",
     "@angular-devkit/build-angular": "~0.1100.1",
     "@angular/cli": "~11.0.1",
     "@angular/compiler-cli": "~11.0.0",
@@ -34,9 +39,12 @@
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.1",
     "husky": "^4.3.8",
+    "intersection-observer": "^0.12.0",
     "jest": "^26.6.3",
+    "jest-junit": "^12.0.0",
     "jest-preset-angular": "^8.3.2",
-    "karma-coverage": "~2.0.3",
+    "jest-sonar": "^0.2.12",
+    "mutationobserver-shim": "^0.3.7",
     "prettier": "^2.2.1",
     "pretty-quick": "^3.1.0",
     "protractor": "~7.0.0",
@@ -53,20 +61,7 @@
       "pre-push": "npm run test && npm run build"
     }
   },
-  "jest": {
-    "preset": "jest-preset-angular",
-    "setupFilesAfterEnv": [
-      "<rootDir>/setupJest.ts"
-    ],
-    "testPathIgnorePatterns": [
-      "<rootDir>/node_modules/",
-      "<rootDir>/dist/"
-    ],
-    "globals": {
-      "ts-jest": {
-        "tsConfig": "<rootDir>/tsconfig.spec.json",
-        "stringifyContentPathRegex": "\\.html$"
-      }
-    }
+  "engines": {
+    "node": "~14"
   }
 }

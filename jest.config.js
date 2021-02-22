@@ -1,15 +1,27 @@
-const { pathsToModuleNameMapper } = require('ts-jest/utils');
-const { compilerOptions } = require('./tsconfig');
+const { defaults } = require('jest-config');
 
 module.exports = {
-  preset: 'jest-preset-angular',
-  roots: ['<rootDir>/src/'],
-  testMatch: ['**/+(*.)+(spec).+(ts)'],
-  setupFilesAfterEnv: ['<rootDir>/src/test.ts'],
   collectCoverage: true,
-  coverageReporters: ['html'],
-  coverageDirectory: 'coverage/my-app',
-  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths || {}, {
-    prefix: '<rootDir>/'
-  })
+  globals: {
+    'ts-jest': {
+      diagnostics: {
+        ignoreCodes: [151001],
+      },
+    },
+  },
+  moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts', 'tsx'],
+  verbose: true,
+  setupFilesAfterEnv: ['<rootDir>/src/jest.setup.ts'],
+  cacheDirectory: '/tmp/jest_insurance-frontend',
+  reporters: [
+    'default',
+    ['jest-junit', { outputDirectory: './test-reports', outputName: 'junit.xml' }],
+    [
+      'jest-sonar',
+      {
+        outputDirectory: './test-reports',
+        outputName: 'sonar.xml',
+      },
+    ],
+  ],
 };
