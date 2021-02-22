@@ -1,10 +1,26 @@
 <testExecutions version="1">
 <file path="src/app/app-routing.module.spec.ts">
-<testCase name="AppRoutingModule should create an instance" duration="4" />
+<testCase name="AppRoutingModule should create an instance" duration="3" />
 </file>
 <file path="src/app/app.component.spec.ts">
-<testCase name="AppComponent should create the app" duration="239" />
-<testCase name="AppComponent should have as title &apos;mspr-recipe-front&apos;" duration="134" />
-<testCase name="AppComponent should render title" duration="102" />
+<testCase name="AppComponent should create the app" duration="295">
+<failure message="Error"><![CDATA[Error: expect(received).toBeNull()
+
+Received: {&quot;title&quot;: &quot;mspr-recipe-front&quot;}
+    at /home/epsi/Projects/mspr_recipe_front/src/app/app.component.spec.ts:16:17
+    at ZoneDelegate.Object.&lt;anonymous&gt;.ZoneDelegate.invoke (/home/epsi/Projects/mspr_recipe_front/node_modules/zone.js/dist/zone.js:386:30)
+    at ProxyZoneSpec.Object.&lt;anonymous&gt;.ProxyZoneSpec.onInvoke (/home/epsi/Projects/mspr_recipe_front/node_modules/zone.js/dist/proxy.js:117:43)
+    at ZoneDelegate.Object.&lt;anonymous&gt;.ZoneDelegate.invoke (/home/epsi/Projects/mspr_recipe_front/node_modules/zone.js/dist/zone.js:385:36)
+    at Zone.Object.&lt;anonymous&gt;.Zone.run (/home/epsi/Projects/mspr_recipe_front/node_modules/zone.js/dist/zone.js:143:47)
+    at Object.wrappedFunc (/home/epsi/Projects/mspr_recipe_front/node_modules/jest-preset-angular/build/zone-patch/index.js:40:30)
+    at Object.asyncJestTest (/home/epsi/Projects/mspr_recipe_front/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
+    at /home/epsi/Projects/mspr_recipe_front/node_modules/jest-jasmine2/build/queueRunner.js:45:12
+    at new Promise (&lt;anonymous&gt;)
+    at mapper (/home/epsi/Projects/mspr_recipe_front/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
+    at /home/epsi/Projects/mspr_recipe_front/node_modules/jest-jasmine2/build/queueRunner.js:75:41
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)]]></failure>
+</testCase>
+<testCase name="AppComponent should have as title &apos;mspr-recipe-front&apos;" duration="181" />
+<testCase name="AppComponent should render title" duration="128" />
 </file>
 </testExecutions>
