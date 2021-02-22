@@ -14,7 +14,10 @@ pipeline {
       steps { sh 'npm run test' }
     }
     stage('Code Quality') {
-      steps { sh "ls ./node_modules/sonar-scanner && chmod +x ./node_modules/sonar-scanner/bin/sonar-scanner && sudo npm run sonar" }
+      def scannerHome = tool 'SonarScanner';
+          withSonarQubeEnv('SonarQube') { // If you have configured more than one global server connection, you can specify its name
+            sh "${scannerHome}/bin/sonar-scanner"
+          }
     }
     stage('Build') {
       steps { sh 'npm run build' }
