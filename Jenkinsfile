@@ -2,7 +2,7 @@ pipeline {
   agent {
     docker { image 'node:lts-alpine' }
   }
-  environment { HOME="." }
+  environment { HOME="." scannerHome='SonarScanner' }
   stages {
     stage('Clean Install Modules') {
       steps { sh 'npm ci' }
@@ -12,6 +12,13 @@ pipeline {
     }
     stage('Unit tests') {
       steps { sh 'npm run test' }
+    }
+    stage('build && SonarQube analysis') {
+      steps {
+        withSonarQubeEnv('SonarQube') {
+          sh "${scannerHome}/bin/sonar-scanner"
+        }
+      }
     }
     stage('Build') {
       steps { sh 'npm run build' }
