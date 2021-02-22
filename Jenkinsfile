@@ -5,7 +5,7 @@ pipeline {
   environment { HOME="." }
   stages {
     stage('Install') {
-      steps { sh 'npm ci && npm i -g sonar-scanner' }
+      steps { sh 'npm ci && npm i sonar-scanner' }
     }
     stage('Static code Analysis') {
       steps { sh 'npm run lint' }

@@ -1,7 +1,7 @@
 <testExecutions version="1">
 <file path="src/app/app.component.spec.ts">
-<testCase name="AppComponent should create the app" duration="230" />
-<testCase name="AppComponent should have as title &apos;mspr-recipe-front&apos;" duration="143" />
-<testCase name="AppComponent should render title" duration="108" />
+<testCase name="AppComponent should create the app" duration="232" />
+<testCase name="AppComponent should have as title &apos;mspr-recipe-front&apos;" duration="124" />
+<testCase name="AppComponent should render title" duration="95" />
 </file>
 </testExecutions>
