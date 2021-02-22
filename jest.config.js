@@ -12,7 +12,7 @@ module.exports = {
   moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts', 'tsx'],
   verbose: true,
   setupFilesAfterEnv: ['<rootDir>/src/jest.setup.ts'],
-  cacheDirectory: '/tmp/jest_insurance-frontend',
+  cacheDirectory: '/tmp/jest-frontend',
   reporters: [
     'default',
     ['jest-junit', { outputDirectory: './test-reports', outputName: 'junit.xml' }],
