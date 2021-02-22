@@ -1,8 +1,10 @@
+def scannerHome = tool 'SonarScanner'
+
 pipeline {
   agent {
     docker { image 'node:lts-alpine' }
   }
-  environment { HOME="." scannerHome='SonarScanner' }
+  environment { HOME="." }
   stages {
     stage('Clean Install Modules') {
       steps { sh 'npm ci' }
