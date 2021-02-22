@@ -1,3 +1,5 @@
+def scannerHome = tool 'SonarScanner'
+
 node {
   stage('SCM') {
     git 'https://github.com/Nicolas-Chambon/mspr_recipe_front'
