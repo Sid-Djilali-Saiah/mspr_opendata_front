@@ -14,7 +14,7 @@ pipeline {
       steps { sh 'npm run test' }
     }
     stage('Code Quality') {
-      steps { sh "npm run sonar" }
+      steps { sh "chmod +x ./node_modules/sonar-scanner && npm run sonar" }
     }
     stage('Build') {
       steps { sh 'npm run build' }
