@@ -1,10 +1,10 @@
 <testExecutions version="1">
 <file path="src/app/app-routing.module.spec.ts">
-<testCase name="AppRoutingModule should create an instance" duration="4" />
+<testCase name="AppRoutingModule should create an instance" duration="3" />
 </file>
 <file path="src/app/app.component.spec.ts">
-<testCase name="AppComponent should create the app" duration="214" />
+<testCase name="AppComponent should create the app" duration="218" />
 <testCase name="AppComponent should have as title &apos;mspr-recipe-front&apos;" duration="120" />
-<testCase name="AppComponent should render title" duration="89" />
+<testCase name="AppComponent should render title" duration="98" />
 </file>
 </testExecutions>

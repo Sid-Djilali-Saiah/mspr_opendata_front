@@ -14,10 +14,10 @@ pipeline {
       steps { sh 'npm run test' }
     }
     stage('Code Quality') {
-      def scannerHome = tool 'SonarScanner';
+      steps {def scannerHome = tool 'SonarScanner';
           withSonarQubeEnv('SonarQube') { // If you have configured more than one global server connection, you can specify its name
             sh "${scannerHome}/bin/sonar-scanner"
-          }
+          }}
     }
     stage('Build') {
       steps { sh 'npm run build' }
