@@ -1,4 +1,4 @@
-/* node {
+node {
   stage('SCM') {
     git 'https://github.com/Nicolas-Chambon/mspr_recipe_front'
   }
@@ -8,7 +8,7 @@
       sh "${scannerHome}/bin/sonar-scanner"
     }
   }
-} */
+}
 pipeline {
   agent none
   stages {
