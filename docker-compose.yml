@@ -3,7 +3,8 @@ services:
   client:
     container_name: mspr-recipe-frontend
     build:
-      context: ./dockerfiles/development/
+      context: .
+      dockerfile: ./dockerfiles/development/
     volumes:
       - ./:/usr/app
       - /usr/app/node_modules
