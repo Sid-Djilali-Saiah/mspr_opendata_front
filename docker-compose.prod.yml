@@ -7,10 +7,5 @@ services:
       dockerfile: ./dockerfiles/production/Dockerfile
     container_name: recipe_frontend
     restart: always
-    expose:
-      - 80
-    environment:
-      - VIRTUAL_PORT=4200
-      - VIRTUAL_HOST=recipe.nonstopintegration.ml
-      - LETSENCRYPT_HOST=recipe.nonstopintegration.ml
-      - LETSENCRYPT_EMAIL=nonstopintegration@gmail.com
+    ports:
+      - 80:4200
