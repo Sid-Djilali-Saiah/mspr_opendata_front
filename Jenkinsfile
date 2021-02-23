@@ -10,22 +10,19 @@ node {
   }
 }
 pipeline {
-  agent {
-    docker { image 'node:lts-alpine' }
-  }
-  environment { HOME="." }
+  agent any
   stages {
-    stage('Clean Install Modules') {
-      steps { sh 'npm ci' }
+    stage('Build container') {
+      steps { sh 'docker-compose -f docker-compose.prod.yml up --build -d' }
     }
-    stage('Static code Analysis') {
-      steps { sh 'npm run lint' }
+    /* stage('Static code Analysis') {
+      steps { sh 'docker exec recipe_frontend npm run lint' }
     }
     stage('Unit tests') {
-      steps { sh 'npm run test:ci' }
+      steps { sh 'docker exec recipe_frontend npm run test:ci' }
     }
     stage('Build') {
       steps { sh 'npm run build' }
-    }
+    } */
   }
 }

@@ -1,11 +1,18 @@
-version: '3.6'
+version: '3'
 
 services:
   frontend:
-    container_name: mspr-recipe-frontend
     build:
       context: .
       dockerfile: ./dockerfiles/production/Dockerfile
+    container_name: recipe_frontend
     restart: always
-    ports:
-    - 80:80
+    volumes:
+      - ./:/usr/app
+    expose:
+      - 80
+    environment:
+      - VIRTUAL_PORT=80
+      - VIRTUAL_HOST=recipe.nonstopintegration.ml
+      - LETSENCRYPT_HOST=recipe.nonstopintegration.ml
+      - LETSENCRYPT_EMAIL=nonstopintegration@gmail.com
