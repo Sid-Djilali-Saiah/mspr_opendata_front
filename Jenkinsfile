@@ -11,29 +11,24 @@ node {
 }
 pipeline {
   agent {
-         docker { image 'node:14-alpine' }
-       }
+    docker { image 'node:lts-alpine' }
+  }
+  environment { HOME="." }
   stages {
-    stage('Install dependencies') {
-
-      steps { sh 'npm install' }
+    stage('Install') {
+      steps { sh 'npm ci && npm i sonar-scanner' }
+    }
+    stage('Static code Analysis') {
+      steps { sh 'npm run lint' }
     }
     stage('Unit tests') {
-
-      steps { sh 'npm run test:ci' }
+      steps { sh 'npm run test' }
     }
-    /* stage('Build container') {
-      agent any
-      steps { sh 'docker-compose -f docker-compose.prod.yml up --build -d' }
-    } */
-    /* stage('Static code Analysis') {
-      steps { sh 'docker exec recipe_frontend npm run lint' }
-    }
-    stage('Unit tests') {
-      steps { sh 'docker exec recipe_frontend npm run test:ci' }
+    stage('Code Quality') {
+      steps { sh "npm run sonar" }
     }
     stage('Build') {
       steps { sh 'npm run build' }
-    } */
+    }
   }
 }
