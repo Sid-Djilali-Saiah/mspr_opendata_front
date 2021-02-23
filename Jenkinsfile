@@ -16,7 +16,7 @@ pipeline {
       agent {
         docker { image 'node:lts' }
       }
-      steps { sh 'npm ci' }
+      steps { sh 'npm install' }
     }
     stage('Unit tests') {
       agent {
