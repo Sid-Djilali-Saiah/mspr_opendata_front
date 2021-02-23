@@ -41,7 +41,6 @@ pipeline {
       steps { sh 'npm run build' }
     }
     stage('Deploy') {
-      agent any
       steps { sh 'docker-compose -f docker-compose.prod.yml up --build -d' }
     }
   }
