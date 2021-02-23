@@ -12,9 +12,11 @@ node {
 pipeline {
   agent none
   stages {
-    stage('Unit tests') {
-      agent { docker { image 'node:lts-alpine' } }
-      steps { sh 'npm ci && npm run test:ci' }
+    stage('Install dependencies') {
+      agent {
+        docker { image 'node:lts-alpine' }
+      }
+      steps { sh 'npm ci' }
     }
     stage('Build container') {
       agent any
