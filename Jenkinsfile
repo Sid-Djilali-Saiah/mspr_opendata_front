@@ -10,26 +10,22 @@ node {
   }
 }
 pipeline {
-  agent none
+  agent {
+         docker { image 'node:lts' }
+       }
   stages {
     stage('Install dependencies') {
-      agent {
-        docker { image 'node:lts' }
-      }
+
       steps { sh 'npm install' }
     }
     stage('Unit tests') {
-      agent {
-        docker {
-          image 'node:lts'
-        }
-      }
+
       steps { sh 'npm run test:ci' }
     }
-    stage('Build container') {
+    /* stage('Build container') {
       agent any
       steps { sh 'docker-compose -f docker-compose.prod.yml up --build -d' }
-    }
+    } */
     /* stage('Static code Analysis') {
       steps { sh 'docker exec recipe_frontend npm run lint' }
     }
