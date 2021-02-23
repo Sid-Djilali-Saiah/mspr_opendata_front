@@ -3,8 +3,8 @@
 <testCase name="AppRoutingModule should create an instance" duration="3" />
 </file>
 <file path="src/app/app.component.spec.ts">
-<testCase name="AppComponent should create the app" duration="306" />
-<testCase name="AppComponent should have as title &apos;mspr-recipe-front&apos;" duration="150" />
-<testCase name="AppComponent should render title" duration="115" />
+<testCase name="AppComponent should create the app" duration="255" />
+<testCase name="AppComponent should have as title &apos;mspr-recipe-front&apos;" duration="133" />
+<testCase name="AppComponent should render title" duration="105" />
 </file>
 </testExecutions>
