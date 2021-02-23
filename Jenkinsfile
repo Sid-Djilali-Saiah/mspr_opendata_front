@@ -12,6 +12,10 @@ node {
 pipeline {
   agent none
   stages {
+    stage('Unit tests') {
+      agent { docker { image 'node:lts-alpine' } }
+      steps { sh 'npm ci && npm run test:ci' }
+    }
     stage('Build container') {
       agent any
       steps { sh 'docker-compose -f docker-compose.prod.yml up --build -d' }
