@@ -8,4 +8,4 @@ services:
       dockerfile: ./dockerfiles/production/Dockerfile
     restart: always
     ports:
-    - '80:80'
+    - 80:80
