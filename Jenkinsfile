@@ -17,7 +17,7 @@ pipeline {
         docker { image 'node:lts-alpine' }
       }
       environment { HOME="." }
-      steps { sh 'npm ci' }
+      steps { sh 'npm install' }
     }
     stage('Static code Analysis') {
       agent {
@@ -41,6 +41,7 @@ pipeline {
       steps { sh 'npm run build' }
     }
     stage('Deploy') {
+      agent any
       steps { sh 'docker-compose -f docker-compose.prod.yml up --build -d' }
     }
   }
