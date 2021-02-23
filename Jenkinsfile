@@ -1,4 +1,4 @@
-node {
+/* node {
   stage('SCM') {
     git 'https://github.com/Nicolas-Chambon/mspr_recipe_front'
   }
@@ -8,26 +8,36 @@ node {
       sh "${scannerHome}/bin/sonar-scanner"
     }
   }
-}
+} */
 pipeline {
-  agent {
-    docker { image 'node:lts-alpine' }
-  }
-  environment { HOME="." }
+  agent none
   stages {
     stage('Install') {
-      steps { sh 'npm ci && npm i sonar-scanner' }
+      agent {
+        docker { image 'node:lts-alpine' }
+      }
+      environment { HOME="." }
+      steps { sh 'npm ci' }
     }
     stage('Static code Analysis') {
+      agent {
+        docker { image 'node:lts-alpine' }
+      }
+      environment { HOME="." }
       steps { sh 'npm run lint' }
     }
     stage('Unit tests') {
-      steps { sh 'npm run test' }
-    }
-    stage('Code Quality') {
-      steps { sh "npm run sonar" }
+      agent {
+        docker { image 'node:lts-alpine' }
+      }
+      environment { HOME="." }
+      steps { sh 'npm run test:ci' }
     }
     stage('Build') {
+      agent {
+        docker { image 'node:lts-alpine' }
+      }
+      environment { HOME="." }
       steps { sh 'npm run build' }
     }
   }
