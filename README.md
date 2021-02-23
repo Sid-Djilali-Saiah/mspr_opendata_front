@@ -16,7 +16,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Jest](https://karma-runner.github.io).
+Run `ng test` to execute the unit tests via [Jest](https://www.npmjs.com/package/@angular-builders/jest).
 
 ## Running end-to-end tests
 
