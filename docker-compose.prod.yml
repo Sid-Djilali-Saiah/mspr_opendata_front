@@ -3,7 +3,9 @@ version: '3.6'
 services:
   frontend:
     container_name: mspr-recipe-frontend
-    build: ./dockerfiles/production/
+    build:
+      context: .
+      dockerfile: ./dockerfiles/production/Dockerfile
     restart: always
     ports:
-    - '4242:4200'
+    - '80:80'
