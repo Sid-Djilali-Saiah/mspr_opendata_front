@@ -10,9 +10,10 @@ node {
   }
 }
 pipeline {
-  agent any
+  agent none
   stages {
     stage('Build container') {
+      agent any
       steps { sh 'docker-compose -f docker-compose.prod.yml up --build -d' }
     }
     /* stage('Static code Analysis') {
