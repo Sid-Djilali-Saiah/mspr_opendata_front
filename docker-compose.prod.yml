@@ -8,4 +8,4 @@ services:
     container_name: recipe_frontend
     restart: always
     ports:
-      - 80:4200
+      - 4242:4200
