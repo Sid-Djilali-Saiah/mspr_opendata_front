@@ -11,34 +11,34 @@ pipeline {
         }
       }
     }
-//     stage('Install') {
-//       agent {
-//         docker { image 'node:lts-alpine' }
-//       }
-//       environment { HOME="." }
-//       steps { sh 'npm install' }
-//     }
-//     stage('Static code Analysis') {
-//       agent {
-//         docker { image 'node:lts-alpine' }
-//       }
-//       environment { HOME="." }
-//       steps { sh 'npm run lint' }
-//     }
-//     stage('Unit tests') {
-//       agent {
-//         docker { image 'node:lts-alpine' }
-//       }
-//       environment { HOME="." }
-//       steps { sh 'npm run test:ci' }
-//     }
-//     stage('Build') {
-//       agent {
-//         docker { image 'node:lts-alpine' }
-//       }
-//       environment { HOME="." }
-//       steps { sh 'npm run build:prod' }
-//     }
+    stage('Install') {
+      agent {
+        docker { image 'node:lts-alpine' }
+      }
+      environment { HOME="." }
+      steps { sh 'npm install' }
+    }
+    stage('Static code Analysis') {
+      agent {
+        docker { image 'node:lts-alpine' }
+      }
+      environment { HOME="." }
+      steps { sh 'npm run lint' }
+    }
+    stage('Unit tests') {
+      agent {
+        docker { image 'node:lts-alpine' }
+      }
+      environment { HOME="." }
+      steps { sh 'npm run test:ci' }
+    }
+    stage('Build') {
+      agent {
+        docker { image 'node:lts-alpine' }
+      }
+      environment { HOME="." }
+      steps { sh 'npm run build:prod' }
+    }
     stage('Sonarqube') {
       agent any
       environment {
