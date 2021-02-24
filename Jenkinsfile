@@ -45,7 +45,10 @@ pipeline {
           def scannerHome = tool 'SonarScanner';
         }
         withSonarQubeEnv('SonarQube') {
-          sh "lorem/bin/sonar-scanner"
+          bat """
+          ${scannerHome}/bin/sonar-runner.bat
+          pip install -r requirements.txt
+          """
         }
       }
     }
