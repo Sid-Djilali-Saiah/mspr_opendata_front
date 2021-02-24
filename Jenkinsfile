@@ -43,7 +43,7 @@ pipeline {
       agent any
       steps {
         script {
-           scannerHome = 'SonarScanner'
+           scannerHome = tool 'SonarScanner'
         }
         withSonarQubeEnv('SonarQube') {
           sh '${scannerHome}/bin/sonar-scanner'
