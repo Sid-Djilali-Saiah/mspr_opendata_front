@@ -5,6 +5,7 @@ pipeline {
       agent any
       steps {
         script {
+          def scannerHome = tool 'SonarScanner';
           env.BRANCH_NAME = "${env.GIT_BRANCH.replaceFirst(/^.*\//, '')}"
           env.ENV_NAME = getEnvName(env.BRANCH_NAME)
         }
@@ -41,12 +42,13 @@ pipeline {
     stage('Sonarqube') {
       agent any
       steps {
-        def scannerHome = tool 'SonarScanner';
-        withSonarQubeEnv('SonarQube') {
-          sh """
-          ${scannerHome}/bin/sonar-runner.bat
-          pip install -r requirements.txt
-          """
+        tools {
+          sonarQube 'SonarQube Scanner 2.8'
+        }
+        steps {
+          withSonarQubeEnv('SonarQube Scanner') {
+            sh 'sonar-scanner'
+          }
         }
       }
     }
