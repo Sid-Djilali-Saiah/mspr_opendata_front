@@ -42,9 +42,11 @@ pipeline {
     stage('Sonarqube') {
       agent any
       steps {
+        environment {
+          SONAR_HOME = tool 'SonarScanner'
+        }
         withSonarQubeEnv('SonarQube') {
-          sh  scannerHome = tool 'SonarScanner'
-          sh '${scannerHome}/bin/sonar-scanner'
+          sh '$SONAR_HOME/bin/sonar-scanner'
         }
       }
     }
