@@ -43,10 +43,10 @@ pipeline {
       agent any
       steps {
         tools {
-          sonarQube 'SonarQube Scanner 2.8'
+          sonarQube 'SonarScanner'
         }
         steps {
-          withSonarQubeEnv('SonarQube Scanner') {
+          withSonarQubeEnv('SonarQube') {
             sh 'sonar-scanner'
           }
         }
