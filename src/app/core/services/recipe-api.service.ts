@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { Recipe } from '../../models/models';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -28,7 +27,17 @@ export class RecipeApiService {
     return this.http.get(`${this.apiUrl}/api/recipes/`).pipe(catchError(RecipeApiService.handleError));
   }
 
-  /*  download(): Observable<any> {
-
-  }*/
+  download(recipeIds: Array<number>): Observable<Blob> {
+    let headers = new HttpHeaders();
+    headers = headers.set('Accept', 'application/pdf');
+    return this.http
+      .post(
+        `${this.apiUrl}/api/recipes/pdf`,
+        {
+          ids: recipeIds,
+        },
+        { headers, responseType: 'blob' as 'json' },
+      )
+      .pipe(catchError(RecipeApiService.handleError));
+  }
 }
