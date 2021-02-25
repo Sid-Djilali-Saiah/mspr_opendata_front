@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class RecipePageComponent implements OnInit {
   recipes$: Observable<any>;
 
-  selectedRecipes: any;
+  selectedOptions = [];
 
   constructor(private recipeService: RecipeApiService) {}
 

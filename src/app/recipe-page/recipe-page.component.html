@@ -1,10 +1,14 @@
 <div class="container" *ngIf="recipes$ | async as recipesList">
-  <mat-selection-list #recipes>
-    <mat-list-option *ngFor="let recipe of recipesList">
+  <h2 mat-subheader>Choisir des recettes :</h2>
+  <mat-divider></mat-divider>
+  <mat-selection-list #recipes multiple  [(ngModel)]='selectedOptions'>
+    <mat-list-option *ngFor="let recipe of recipesList" [value]='recipe.id'>
       {{ recipe.name }}
     </mat-list-option>
   </mat-selection-list>
-  <div class="container">
+  <mat-divider></mat-divider>
+  <div [ngStyle]='{ marginTop: "20px" }'>
     <p>Options selected: {{ recipes.selectedOptions.selected.length }}</p>
+    <p *ngIf='selectedOptions.length > 0'>Options selected ids : [ {{ selectedOptions }} ]</p>
   </div>
 </div>
