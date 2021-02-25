@@ -1,0 +1,15 @@
+<div class="container" *ngIf="recipes$ | async as recipesList">
+  <h2 mat-subheader>Choisir des recettes :</h2>
+  <mat-divider></mat-divider>
+  <mat-selection-list multiple [(ngModel)]="selectedOptions">
+    <mat-list-option *ngFor="let recipe of recipesList" [value]="recipe.id">
+      {{ recipe.name }}
+    </mat-list-option>
+  </mat-selection-list>
+  <mat-divider></mat-divider>
+  <div class="button-container">
+    <button mat-stroked-button color="primary" [disabled]="selectedOptions.length <= 0" (click)="downloadRecipes()">
+      Télécharger les recettes
+    </button>
+  </div>
+</div>

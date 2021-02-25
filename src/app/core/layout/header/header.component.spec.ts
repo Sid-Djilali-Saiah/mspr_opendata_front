@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
+import {MaterialModule} from "../../../shared/material.module";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -8,6 +10,7 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [MaterialModule, BrowserAnimationsModule],
       declarations: [ HeaderComponent ]
     })
     .compileComponents();
