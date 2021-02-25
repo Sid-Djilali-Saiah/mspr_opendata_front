@@ -26,11 +26,30 @@ services:
 
 > Ce fichier **docker-compose** permet de :
 >
-> * Pour le service `backend`
->   * Construire un conteneur appelé `mspr-recipe-frontend` à partir du **Dockerfile** présent à la racine du projet`
+> * Pour le service `frontend`
+>   * Construire un conteneur appelé `mspr-recipe-frontend` à partir du **Dockerfile** présent dans le dossier `./dockerfiles/local/`
 >   * Utiliser la racine du répertoire local comme **volumes** et le lier au source du container
 >   * Rediriger le port **4200** du container vers le **4200** de la machine parent
 
+> **Dockerfile** utilisé pour l'environnement local :
+```Dockerfile
+FROM node:lts-alpine
+
+WORKDIR /usr/app
+
+COPY ./package*.json ./
+
+RUN npm ci -qy
+
+COPY ./ .
+
+EXPOSE 4200
+
+CMD ["npm", "run", "start:dev"]
+```
+> * Utilise une image node lts (Long Terme Support)
+> * Récupération du fichier `package.json` puis installation des dépendances
+> * Récupération des sources et lancement de l'application en mode développement sur le port **4200** du container
 
 
 * Pour construire le container et le déployer en local
