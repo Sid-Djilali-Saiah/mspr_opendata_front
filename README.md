@@ -87,57 +87,6 @@ Sonarqube
 * Indiquer la conf pour expliquer comme la changer (pom.xml) => source a inclure ou exclure
 * Indiquer les règles importantes/bloquantes par défault et si il y en a, les customs
 
-### Intégration continue
-
-#### Jenkins
-
-##### Première utilisation
-
-1. Demandez à un administrateur de vous créer un compte Jenkins
-2. Connectez vous à l'adresse suivante : http://jenkins.nonstopintegration.ml:8080/
-3. Renseigner les identifiants obtenu par votre administrateur précédemment
-4. Il est **recommandé** de modifier votre mot de passe lors de votre première connexion
-
-##### Guide d'utilisation 
-
-###### 	Dashboard
-
-Le Dashboard est la racine de notre jenkins, c'est ici que vous verrez les différent repository GitHub selon vos habilitation.
-
-sur cette page vous pouvez voir différentes indicateur sur le repository, le plus important est certainement le "temps", ce dernier indique l'état des dernière pipeline exécuté, 3 états sont possibles :
-
-- Ensoleillé
-- Nuageux
-- Pluvieux
-
-Vous pouvez cliquer sur l'un de ces repository pour accéder à la page suivante.
-
-
-
-###### 	Dashboard > nom_du_repo
-
-> **NB :** Nous utilisons une architecture multi branche, de ce fait, Jenkins récupère toutes les branché lié au repository GitHub lié  
-
-
-
-##### Stratégie d'intégration et de déploiement continue
-
-#### Redmine
-
-* Redmine : Expliquer comment utiliser jenkins (créer un compte, lancer le build, ...)
-
-* Expliquer la stratégie du build (décrire jenkinsfile)
-* Indiquer que c'est automatique (hook) + autres règles s'il y en a
-
-
-### Déploiement
-
-* à ajouter sur redmine de façon précise (ici on a déjà ce qu'il faut avec l'integration continue)
-
-
-
-
-
 ### hooks avec Husky
 
 > **NB :** Un hook est un script qui s’exécute automatiquement lorsqu’un événement particulier se produit dans un dépôt git.
