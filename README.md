@@ -1,75 +1,5 @@
 # Recipe Front-end
 
-## Mise en place de l'environnement de développement
-
-> * Cloner le repository GitHub suivant : https://github.com/Nicolas-Chambon/mspr_recipe_front
-
-Pour l'environnement local, utiliser le fichier `docker-compose.yml` :
-
-```yml
-version: '3'
-services:
-  client:
-    container_name: mspr-recipe-frontend
-    build:
-      context: .
-      dockerfile: dockerfiles/local/Dockerfile
-    volumes:
-      - ./:/usr/app
-      - /usr/app/node_modules
-    ports:
-      - 4200:4200
-```
-
-> Ce fichier **docker-compose** permet de :
->
-> * Pour le service `backend`
->   * Construire un conteneur appelé `mspr-recipe-frontend` à partir du **Dockerfile** présent à la racine du projet`
->   * Utiliser la racine du répertoire local comme **volumes** et le lier au source du container
->   * Rediriger le port **4200** du container vers le **4200** de la machine parent
-
-
-
-* Pour construire le container et le déployer en local
-
-```bash
-docker-compose up --build -d
-```
-
-* L'Application est disponible à l'URL suivant : 
-
-```html
-http://localhost:4200
-```
-
-> **NB :** Les sources local sont liées à celle présente dans le container, du coup pas besoin de build de nouveau à chaque changement dans le code.
-
-## Githooks avec Husky
-
-> Un hook est un script qui s’exécute automatiquement lorsqu’un événement particulier se produit dans un dépôt git. Les scripts se trouves dans le fichier `package.json`
-
-- #### pre-commit (Ce hook se déclenche en premier avant même de saisir le message du commit)
-
-  ```sh
-    npm run format && npm run lint
-  ```
-
-  > Formate le code à l'aide de prettier puis lance un linter sur le code afin de vérifier toute erreur potentiel avant de valider le commit
-
-- #### pre-push (Ce hook se déclenche avant l’exécution de la commande git push)
-
-  ```sh
-     npm run test && npm run build
-  ```
-
-  > Lance les tests utitaires puis une compilation du projet et vérifie que les deux réussissent avec d'autoriser le push
-
-- #### Contourner les hooks
-
-  Si besoin il est possible de contourner l’utilisation des hooks via l’option `--no-verify`
-
-  **NB : Cette option n'est à utiliser que lorsque cela est nécessaire.**
-
 
 ## Projet
 
@@ -157,3 +87,73 @@ npm run lint
 ```sh
 npm run sonar
 ```
+
+## Mise en place de l'environnement de développement
+
+> * Cloner le repository GitHub suivant : https://github.com/Nicolas-Chambon/mspr_recipe_front
+
+Pour l'environnement local, utiliser le fichier `docker-compose.yml` :
+
+```yml
+version: '3'
+services:
+  client:
+    container_name: mspr-recipe-frontend
+    build:
+      context: .
+      dockerfile: dockerfiles/local/Dockerfile
+    volumes:
+      - ./:/usr/app
+      - /usr/app/node_modules
+    ports:
+      - 4200:4200
+```
+
+> Ce fichier **docker-compose** permet de :
+>
+> * Pour le service `backend`
+>   * Construire un conteneur appelé `mspr-recipe-frontend` à partir du **Dockerfile** présent à la racine du projet`
+>   * Utiliser la racine du répertoire local comme **volumes** et le lier au source du container
+>   * Rediriger le port **4200** du container vers le **4200** de la machine parent
+
+
+
+* Pour construire le container et le déployer en local
+
+```bash
+docker-compose up --build -d
+```
+
+* L'Application est disponible à l'URL suivant : 
+
+```html
+http://localhost:4200
+```
+
+> **NB :** Les sources local sont liées à celle présente dans le container, du coup pas besoin de build de nouveau à chaque changement dans le code.
+
+## Githooks avec Husky
+
+> Un hook est un script qui s’exécute automatiquement lorsqu’un événement particulier se produit dans un dépôt git. Les scripts se trouves dans le fichier `package.json`
+
+- #### pre-commit (Ce hook se déclenche en premier avant même de saisir le message du commit)
+
+  ```sh
+    npm run format && npm run lint
+  ```
+
+  > Formate le code à l'aide de prettier puis lance un linter sur le code afin de vérifier toute erreur potentiel avant de valider le commit
+
+- #### pre-push (Ce hook se déclenche avant l’exécution de la commande git push)
+
+  ```sh
+     npm run test && npm run build
+  ```
+
+  > Lance les tests utitaires puis une compilation du projet et vérifie que les deux réussissent avec d'autoriser le push
+
+- #### Contourner les hooks
+
+  Si besoin il est possible de contourner l’utilisation des hooks via l’option `--no-verify`
+
+  **NB : Cette option n'est à utiliser que lorsque cela est nécessaire.**
