@@ -5,6 +5,8 @@ import { RouterTestingModule } from "@angular/router/testing";
 import { MaterialModule } from "../shared/material.module";
 import { FormsModule } from "@angular/forms";
 import {RecipeApiService} from "../core/services/recipe-api.service";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('RecipePageComponent', () => {
   let component: RecipePageComponent;
@@ -17,6 +19,8 @@ describe('RecipePageComponent', () => {
         RouterTestingModule.withRoutes([]),
         MaterialModule,
         FormsModule,
+        HttpClientTestingModule,
+        BrowserAnimationsModule
       ],
       declarations: [RecipePageComponent],
     }).compileComponents();
