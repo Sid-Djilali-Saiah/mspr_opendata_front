@@ -1,0 +1,10 @@
+<div class="container" *ngIf="recipes$ | async as recipesList">
+  <mat-selection-list #recipes>
+    <mat-list-option *ngFor="let recipe of recipesList">
+      {{ recipe.name }}
+    </mat-list-option>
+  </mat-selection-list>
+  <div class="container">
+    <p>Options selected: {{ recipes.selectedOptions.selected.length }}</p>
+  </div>
+</div>
