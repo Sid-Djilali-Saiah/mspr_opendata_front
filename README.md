@@ -133,7 +133,7 @@ npm run sonar
 
 ### Githooks avec Husky
 
-> Un hook est un script qui s’exécute automatiquement lorsqu’un événement particulier se produit dans un dépôt git.
+> Un hook est un script qui s’exécute automatiquement lorsqu’un événement particulier se produit dans un dépôt git. Les scripts se trouves dans le fichier `package.json`
 
 - #### pre-commit (Ce hook se déclenche en premier avant même de saisir le message du commit)
 
