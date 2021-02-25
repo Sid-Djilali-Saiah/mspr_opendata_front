@@ -30,7 +30,7 @@ services:
 >   * Construire un conteneur appelé `mspr-recipe-frontend` à partir du **Dockerfile** présent dans le dossier `./dockerfiles/local/`
 >   * Utiliser la racine du répertoire local comme **volumes** et le lier au source du container
 >   * Rediriger le port **4200** du container vers le **4200** de la machine parent
-
+>
 > **Dockerfile** utilisé pour l'environnement local :
 ```Dockerfile
 FROM node:lts-alpine
