@@ -54,15 +54,11 @@ CMD ["npm", "run", "start:dev"]
 
 * Pour construire le container et le déployer en local
 
-```bash
+```sh
 docker-compose up --build -d
 ```
 
-* L'Application est disponible à l'URL suivant : 
-
-```html
-http://localhost:4200
-```
+* L'Application est disponible à l'URL suivant : `http://localhost:4200`
 
 > **NB :** Les sources local sont liées à celle présente dans le container, du coup pas besoin de build de nouveau à chaque changement dans le code.
 
