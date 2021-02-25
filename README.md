@@ -23,7 +23,7 @@ services:
 
 > Ce fichier **docker-compose** permet de :
 >
-> * Pour le service `backend``
+> * Pour le service `backend`
 >   * Construire un conteneur appelé `mspr-recipe-frontend` à partir du **Dockerfile** présent à la racine du projet`
 >   * Utiliser la racine du répertoire local comme **volumes** et le lier au source du container
 >   * Rediriger le port **4200** du container vers le **4200** de la machine parent
@@ -68,9 +68,11 @@ http://localhost:4200
 - build:prod
 
 ### Tests Unitaires
+```sh
+npm run test
+```
 - test
 - test:ci
-- test:update
 - test:watch
 
 ### Outils de qualité du code
