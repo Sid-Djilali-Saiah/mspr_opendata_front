@@ -4,7 +4,7 @@
 
 > * Cloner le repository GitHub suivant : https://github.com/Nicolas-Chambon/mspr_recipe_front
 
-* Pour l'environnement local, utiliser le fichier `docker-compose.yml`
+Pour l'environnement local, utiliser le fichier `docker-compose.yml` :
 
 ```yml
 version: '3'
