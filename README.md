@@ -7,7 +7,7 @@
 
 ## Mise en place de l'environnement de développement
 
-Pour l'environnement local, utiliser le fichier `docker-compose.yml` :
+* Pour l'environnement local, utiliser le fichier `docker-compose.yml` :
 
 ```yml
 version: '3'
