@@ -90,8 +90,6 @@ npm run sonar
 
 ## Mise en place de l'environnement de développement
 
-> * Cloner le repository GitHub suivant : https://github.com/Nicolas-Chambon/mspr_recipe_front
-
 Pour l'environnement local, utiliser le fichier `docker-compose.yml` :
 
 ```yml
