@@ -1,5 +1,51 @@
 # Recipe Front-end
 
+## Pré-requis
+
+* Git
+* Docker et Docker Compose
+
+## Mise en place de l'environnement de développement
+
+Pour l'environnement local, utiliser le fichier `docker-compose.yml` :
+
+```yml
+version: '3'
+services:
+  client:
+    container_name: mspr-recipe-frontend
+    build:
+      context: .
+      dockerfile: dockerfiles/local/Dockerfile
+    volumes:
+      - ./:/usr/app
+      - /usr/app/node_modules
+    ports:
+      - 4200:4200
+```
+
+> Ce fichier **docker-compose** permet de :
+>
+> * Pour le service `backend`
+>   * Construire un conteneur appelé `mspr-recipe-frontend` à partir du **Dockerfile** présent à la racine du projet`
+>   * Utiliser la racine du répertoire local comme **volumes** et le lier au source du container
+>   * Rediriger le port **4200** du container vers le **4200** de la machine parent
+
+
+
+* Pour construire le container et le déployer en local
+
+```bash
+docker-compose up --build -d
+```
+
+* L'Application est disponible à l'URL suivant : 
+
+```html
+http://localhost:4200
+```
+
+> **NB :** Les sources local sont liées à celle présente dans le container, du coup pas besoin de build de nouveau à chaque changement dans le code.
 
 ## Projet
 
@@ -87,48 +133,6 @@ npm run lint
 ```sh
 npm run sonar
 ```
-
-## Mise en place de l'environnement de développement
-
-Pour l'environnement local, utiliser le fichier `docker-compose.yml` :
-
-```yml
-version: '3'
-services:
-  client:
-    container_name: mspr-recipe-frontend
-    build:
-      context: .
-      dockerfile: dockerfiles/local/Dockerfile
-    volumes:
-      - ./:/usr/app
-      - /usr/app/node_modules
-    ports:
-      - 4200:4200
-```
-
-> Ce fichier **docker-compose** permet de :
->
-> * Pour le service `backend`
->   * Construire un conteneur appelé `mspr-recipe-frontend` à partir du **Dockerfile** présent à la racine du projet`
->   * Utiliser la racine du répertoire local comme **volumes** et le lier au source du container
->   * Rediriger le port **4200** du container vers le **4200** de la machine parent
-
-
-
-* Pour construire le container et le déployer en local
-
-```bash
-docker-compose up --build -d
-```
-
-* L'Application est disponible à l'URL suivant : 
-
-```html
-http://localhost:4200
-```
-
-> **NB :** Les sources local sont liées à celle présente dans le container, du coup pas besoin de build de nouveau à chaque changement dans le code.
 
 ## Githooks avec Husky
 
