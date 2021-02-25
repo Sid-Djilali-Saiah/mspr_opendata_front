@@ -61,25 +61,55 @@ http://localhost:4200
 
 ### Commande utiles
 
-- ng
-- start
-- start:dev
-- build
-- build:prod
+- Commande pour lancer l'application en local sur la machine hôte
+```sh
+npm run start
+```
+- Commande pour lancer l'application dans le conteneur docker de developement afin que la redirection du container vers l'hôte fontionne
+```sh
+npm run start:dev
+```
+- Commande pour compiler les sources du projet pour l'environement de dev
+```sh
+npm run build
+```
+- Commande pour compiler les sources du projet pour la production
+```sh
+npm run build:prod
+```
 
 ### Tests Unitaires
+
+- Commande pour lancer les tests unitaires en local
 ```sh
 npm run test
 ```
-- test
-- test:ci
-- test:watch
+- Commande permettant d'executer les tests unitaires dans la pipeline d'intégration continue et de générer un rapport de test au format `juint` ainsi qu'un rapport de coverage au format `jacoco`, qui vont ensuite être interprêtés par l'outil d'analyse de qualité du code.
+```sh
+npm run test:ci
+```
+- Commande permettant de relancer automatique, pendant le developement, les tests sur un fichier qui vient d'être modifié
+```sh
+npm run test:watch
+```
+- Commande permettant de lancer des tests end to end avec [Protractor](https://www.protractortest.org/#/)
+```sh
+npm run e2e
+```
 
 ### Outils de qualité du code
-- lint
-- format
-- sonar
-- e2e
+- Commande pour formatter le code en utilisant le module Prettier et la configuration dans le fivhier `.prettierrc` 
+```sh
+npm run format
+```
+- Commande permettant de valider que toutes les régles de formattage de code et bonnes pratiques définies dans le fichier `tslint.json` soient bien respectée et d'afficher les potentiels erreurs.
+```sh
+npm run lint
+```
+- Commande pour lancer l'analyse de qualité du code en local
+```sh
+npm run sonar
+```
 
 ### Githooks avec Husky
 
@@ -87,18 +117,19 @@ npm run test
 
 - #### pre-commit (Ce hook se déclenche en premier avant même de saisir le message du commit)
 
-  - npm run format
-    - Formate le code à l'aide de prettier avant de valider un commit
-  - npm run lint
-    - Lance un linter sur le code afin de vérifier toute erreur potentiel avant de valider le commit
+  ```sh
+    npm run format && npm run lint
+  ```
+  > - Formate le code à l'aide de prettier puis lance un linter sur le code afin de vérifier toute erreur potentiel avant de valider le commit
 
 - #### pre-push (Ce hook se déclenche avant l’exécution de la commande git push)
 
-  - npm run test
-    - Lance les tests sur le projet avant de push
-  - npm run build
-    - Tente de build le projet avant de push
+  ```sh
+     npm run test && npm run build
+   ```
+  > - Lance les tests utitaires puis une compilation du projet et vérifie que les deux réussissent avec d'autoriser le push
 
 - #### Contourner les hooks
 
   - Si besoin il est possible de contourner l’utilisation des hooks via l’option `--no-verify`
+> **NB :** Cette option n'est à utiliser que lorsque cela est nécessaire.
