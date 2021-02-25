@@ -1,6 +1,9 @@
-## Installation et utilisation de l'environnement de développement front-end
+# Recipe Front-end
 
-* Cloner le repository GitHub suivant : https://github.com/Nicolas-Chambon/mspr_recipe_front
+## Mise en place de l'environnement de développement
+
+> * Cloner le repository GitHub suivant : https://github.com/Nicolas-Chambon/mspr_recipe_front
+
 * Pour l'environnement local, utiliser le fichier `docker-compose.yml`
 
 ```yml
@@ -63,31 +66,20 @@ http://localhost:4200
 - start:dev
 - build
 - build:prod
+
+### Tests Unitaires
 - test
 - test:ci
 - test:update
 - test:watch
+
+### Outils de qualité du code
 - lint
 - format
 - sonar
 - e2e
 
-### Tests Unitaires
-
-
-
-### Outils de qualité du code
-
-Prettier
-
-Tslint
-
-Sonarqube 
-
-* Indiquer la conf pour expliquer comme la changer (pom.xml) => source a inclure ou exclure
-* Indiquer les règles importantes/bloquantes par défault et si il y en a, les customs
-
-### hooks avec Husky
+### Githooks avec Husky
 
 > **NB :** Un hook est un script qui s’exécute automatiquement lorsqu’un événement particulier se produit dans un dépôt git.
 
@@ -107,4 +99,4 @@ Sonarqube
 
 - #### Contourner les hooks
 
-  - Si besoin il est possible de contourner l’utilisation des hooks via l’option --no-verify
+  - Si besoin il est possible de contourner l’utilisation des hooks via l’option `--no-verify`
