@@ -44,7 +44,34 @@ http://localhost:4200
 
 > **NB :** Les sources local sont liées à celle présente dans le container, du coup pas besoin de build de nouveau à chaque changement dans le code.
 
+## Githooks avec Husky
 
+> Un hook est un script qui s’exécute automatiquement lorsqu’un événement particulier se produit dans un dépôt git. Les scripts se trouves dans le fichier `package.json`
+
+- #### pre-commit (Ce hook se déclenche en premier avant même de saisir le message du commit)
+
+  ```sh
+    npm run format && npm run lint
+  ```
+
+  > Formate le code à l'aide de prettier puis lance un linter sur le code afin de vérifier toute erreur potentiel avant de valider le commit
+
+- #### pre-push (Ce hook se déclenche avant l’exécution de la commande git push)
+
+  ```sh
+     npm run test && npm run build
+  ```
+
+  > Lance les tests utitaires puis une compilation du projet et vérifie que les deux réussissent avec d'autoriser le push
+
+- #### Contourner les hooks
+
+  Si besoin il est possible de contourner l’utilisation des hooks via l’option `--no-verify`
+
+  **NB : Cette option n'est à utiliser que lorsque cela est nécessaire.**
+
+
+## Projet
 
 ### Dépendances
 
@@ -130,29 +157,3 @@ npm run lint
 ```sh
 npm run sonar
 ```
-
-### Githooks avec Husky
-
-> Un hook est un script qui s’exécute automatiquement lorsqu’un événement particulier se produit dans un dépôt git. Les scripts se trouves dans le fichier `package.json`
-
-- #### pre-commit (Ce hook se déclenche en premier avant même de saisir le message du commit)
-
-  ```sh
-    npm run format && npm run lint
-  ```
-
-  > Formate le code à l'aide de prettier puis lance un linter sur le code afin de vérifier toute erreur potentiel avant de valider le commit
-
-- #### pre-push (Ce hook se déclenche avant l’exécution de la commande git push)
-
-  ```sh
-     npm run test && npm run build
-  ```
-
-  > Lance les tests utitaires puis une compilation du projet et vérifie que les deux réussissent avec d'autoriser le push
-
-- #### Contourner les hooks
-
-  Si besoin il est possible de contourner l’utilisation des hooks via l’option `--no-verify`
-
-  **NB : Cette option n'est à utiliser que lorsque cela est nécessaire.**
