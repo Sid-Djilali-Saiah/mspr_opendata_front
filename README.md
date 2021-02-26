@@ -30,7 +30,7 @@ CMD ["npm", "run", "start:dev"]
 > * Récupérer les sources et lancer l'application en mode développement sur le port **4200** du container
 
 
-* On utilise ensuite le fichier  `docker-compose.dev.yml`  (qui utilisera le  `Dockerfile`  pour build l'application) :
+* On utilise ensuite le fichier  `docker-compose.yml`  (qui utilisera le  `Dockerfile`  pour build l'application) :
 
 ```yml
 version: '3'
