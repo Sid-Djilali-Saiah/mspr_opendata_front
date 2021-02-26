@@ -27,7 +27,7 @@ CMD ["npm", "run", "start:dev"]
 > Ce fichier  **Dockerfile**  permet de :
 > * D'utiliser une image node lts (Long Terme Support)
 > * Récupérer du fichier `package.json` puis d'installer des dépendances
-> * Récupérer les sources et lacer l'application en mode développement sur le port **4200** du container
+> * Récupérer les sources et lancer l'application en mode développement sur le port **4200** du container
 
 
 * On utilise ensuite le fichier  `docker-compose.dev.yml`  (qui utilisera le  `Dockerfile`  pour build l'application) :
