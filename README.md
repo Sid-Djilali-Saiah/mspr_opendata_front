@@ -73,7 +73,7 @@ docker-compose up --build -d
 | rxjs       |   6.6.0 | librairie permettant de faciliter la gestion des évènements asynchrones |
 | tslib      |   2.0.0 | Il s'agit d'une bibliothèque d'exécution pour TypeScript qui contient toutes les fonctions d'assistance TypeScript. |
 | jest       |  26.6.3 | Framework de test javascript                                 |
-| prettier   |   2.2.1 | Permet de formaté le code d'un projet selon des règles spécifiques |
+| prettier   |   2.2.1 | Permet de formater le code d'un projet selon des règles spécifiques |
 | tslint     |   6.1.0 | TSLint est un outil d'analyse statique extensible qui vérifie le code TypeScript pour la lisibilité, la maintenabilité et les erreurs de fonctionnalité |
 | husky      |   4.3.8 | Husky est une librairie permettant de faciliter la création et le partage des hooks au sein d’un projet |
 | typescript |   4.0.2 | TypeScript est un langage de programmation libre et open source développé par Microsoft |
