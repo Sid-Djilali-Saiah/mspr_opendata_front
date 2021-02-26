@@ -78,7 +78,7 @@ docker-compose up --build -d
 | husky      |   4.3.8 | Husky est une librairie permettant de faciliter la création et le partage des hooks au sein d’un projet |
 | typescript |   4.0.2 | TypeScript est un langage de programmation libre et open source développé par Microsoft |
 
-### Commande utiles
+### Commandes utiles
 
 - Commande pour lancer l'application en local sur la machine hôte
 
@@ -149,7 +149,9 @@ npm run lint
 ```sh
 npm run sonar
 ```
+
 ### Intégration continue
+
 L’intégration continue de projet est géré avec une pipeline `jenkins` multibranche disponible sur l'url : http://nonstopintegration.ml:8080/
 
 * Le fichier `Jenkinsfile` nous permet de gérer cette pipeline : 
@@ -270,24 +272,24 @@ pipeline {
 
 > Un hook est un script qui s’exécute automatiquement lorsqu’un événement particulier se produit dans un dépôt git. Les scripts se trouvent dans le fichier `package.json`
 
-- #### pre-commit (Ce hook se déclenche en premier avant même de saisir le message du commit)
+#### pre-commit (Ce hook se déclenche en premier avant même de saisir le message du commit)
 
   ```sh
     npm run format && npm run lint
   ```
 
-  > Formate le code à l'aide de prettier puis lance un linter sur le code afin de vérifier toute erreur potentiel avant de valider le commit
+> Formate le code à l'aide de prettier puis lance un linter sur le code afin de vérifier toute erreur potentiel avant de valider le commit
 
-- #### pre-push (Ce hook se déclenche avant l’exécution de la commande git push)
+#### pre-push (Ce hook se déclenche avant l’exécution de la commande git push)
 
   ```sh
      npm run test && npm run build
   ```
 
-  > Lance les tests utitaires puis une compilation du projet et vérifie que les deux réussissent avec d'autoriser le push
+> Lance les tests utitaires puis une compilation du projet et vérifie que les deux réussissent avec d'autoriser le push
 
-- #### Contourner les hooks
+#### Contourner les hooks
 
-  Si besoin il est possible de contourner l’utilisation des hooks via l’option `--no-verify`
+Si besoin il est possible de contourner l’utilisation des hooks via l’option `--no-verify`
 
-  **NB : Cette option n'est à utiliser que lorsque cela est nécessaire.**
+**NB : Cette option n'est à utiliser que lorsque cela est nécessaire.**
