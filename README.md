@@ -50,7 +50,7 @@ services:
 > Ce fichier **docker-compose** permet de :
 >
 > * Pour le service `frontend`
-    >   * Construire un conteneur appelé `mspr-recipe-frontend` à partir du **Dockerfile** présent dans le dossier `./dockerfiles/local/`
+>   * Construire un conteneur appelé `mspr-recipe-frontend` à partir du **Dockerfile** présent dans le dossier `./dockerfiles/local/`
 >   * Utiliser la racine du répertoire local comme **volumes** et le lier au source du container
 >   * Rediriger le port **4200** du container vers le **4200** de la machine parent
 
@@ -132,7 +132,7 @@ npm run e2e
 
 ### Outils de qualité du code
 
-- Commande pour formater le code en utilisant le module Prettier et la configuration dans le fichier `.prettierrc`
+- Commande pour formater le code en utilisant le module Prettier et la configuration dans le fichier `.prettierrc` 
 
 ```sh
 npm run format
@@ -152,7 +152,7 @@ npm run sonar
 ### Intégration continue
 L’intégration continue de projet est géré avec une pipeline `jenkins` multibranche disponible sur l'url : http://nonstopintegration.ml:8080/
 
-* Le fichier `Jenkinsfile` nous permet de gérer cette pipeline :
+* Le fichier `Jenkinsfile` nous permet de gérer cette pipeline : 
 ```java
 def getEnvName(branchName) {
   if (branchName.startsWith("release-")) {
@@ -240,15 +240,15 @@ pipeline {
 > Ce fichier **Jenkinsfile** permet de créer une pipeline déclarative dont les différentes étapes sont :
 >
 > * De mettre en place les variables d'environnements :
-    >   * `BRANCH_NAME` : Ici on retire le préfix "origin/" du nom de la  branche
+>   * `BRANCH_NAME` : Ici on retire le préfix "origin/" du nom de la  branche
 >   * `ENV_NAME` : On définit l'environnement (`prod`, `préprod` ou `dev`) en fonction du nom de la branche.
-> * D'installer les dépendances du projet du projet :
-    >   * A partir d'un docker créé avec l'image `node:lts-alpine`
-> * D'exécuter les tests unitaire du projet et générer les rapports de tests et de coverage au bon format :
-    >   * A partir d'un docker créé avec l'image `node:lts-alpine`
+> * D'installer les dépendances du projet du projet : 
+>   * A partir d'un docker créé avec l'image `node:lts-alpine`
+> * D'exécuter les tests unitaire du projet et générer les rapports de tests et de coverage au bon format : 
+>   * A partir d'un docker créé avec l'image `node:lts-alpine`
 >   * En spécifiant l'option `npm run test:ci`
-> * D'analyser la qualité du code avec SonarQube :
-    >   * A partir d'un docker créé avec l'image `node:lts-alpine`
+> * D'analyser la qualité du code avec SonarQube : 
+>   * A partir d'un docker créé avec l'image `node:lts-alpine`
 >   * withSonarQubeEnv nous permet d'exécuter l'analyse sur l'environnement sonar en utilisant le sonar-scanner pour TypeScript.
 >   * waitForQualityGate nous permet d'attendre la réponse de sonar et ainsi d'indiquer à la pipeline si ce stage doit échouer ou non
 > * De déployer notre application si l'environnement est la prod ou la préprod, sinon l'étape est ignorée. Nous utilisons la variable "ENV_NAME" pour sélectionner le bon fichier "docker-compose".
