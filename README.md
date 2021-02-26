@@ -100,6 +100,8 @@ npm run build
 
 - Commande pour compiler les sources du projet pour la production. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
+- Commande pour compiler les sources du projet pour la production. Les artefacts de compilation seront stockés dans le répertoire `dist/`. Utilisez l'option `--prod` pour l'environnement de production.
+
 ```sh
 npm run build:prod
 ```
