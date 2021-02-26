@@ -290,6 +290,5 @@ pipeline {
 
 #### Contourner les hooks
 
-Si besoin il est possible de contourner l’utilisation des hooks via l’option `--no-verify`
-
+> Si besoin il est possible de contourner l’utilisation des hooks via l’option `--no-verify`
 **NB : Cette option n'est à utiliser que lorsque cela est nécessaire.**
