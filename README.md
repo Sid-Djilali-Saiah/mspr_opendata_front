@@ -1,3 +1,4 @@
+
 # MSPR Recipe Front-end
 
 ## Pré-requis
@@ -7,7 +8,29 @@
 
 ## Mise en place de l'environnement de développement
 
-* Pour l'environnement local, utiliser le fichier `docker-compose.yml` :
+* Afin de conteneuriser notre application, nous avons créé le  `Dockerfile`  suivant :
+```Dockerfile
+FROM node:lts-alpine
+
+WORKDIR /usr/app
+
+COPY ./package*.json ./
+
+RUN npm ci -qy
+
+COPY ./ .
+
+EXPOSE 4200
+
+CMD ["npm", "run", "start:dev"]
+```
+> Ce fichier  **Dockerfile**  permet de :
+> * D'utiliser une image node lts (Long Terme Support)
+> * Récupérer du fichier `package.json` puis d'installer des dépendances
+> * Récupérer les sources et lacer l'application en mode développement sur le port **4200** du container
+
+
+* On utilise ensuite le fichier  `docker-compose.dev.yml`  (qui utilisera le  `Dockerfile`  pour build l'application) :
 
 ```yml
 version: '3'
@@ -30,26 +53,6 @@ services:
 >   * Construire un conteneur appelé `mspr-recipe-frontend` à partir du **Dockerfile** présent dans le dossier `./dockerfiles/local/`
 >   * Utiliser la racine du répertoire local comme **volumes** et le lier au source du container
 >   * Rediriger le port **4200** du container vers le **4200** de la machine parent
->
-> **Dockerfile** utilisé pour l'environnement local :
-```Dockerfile
-FROM node:lts-alpine
-
-WORKDIR /usr/app
-
-COPY ./package*.json ./
-
-RUN npm ci -qy
-
-COPY ./ .
-
-EXPOSE 4200
-
-CMD ["npm", "run", "start:dev"]
-```
-> * Utilise une image node lts (Long Terme Support)
-> * Récupération du fichier `package.json` puis installation des dépendances
-> * Récupération des sources et lancement de l'application en mode développement sur le port **4200** du container
 
 
 * Pour construire le container et le déployer en local
@@ -61,18 +64,6 @@ docker-compose up --build -d
 * L'Application est disponible à l'URL suivant : `http://localhost:4200`
 
 > **NB :** Les sources local sont liées à celle présente dans le container, du coup pas besoin de build de nouveau à chaque changement dans le code.
-
-## Projet
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.1.
-
-### Plus d'informations
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
-### Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ### Dépendances
 
