@@ -68,7 +68,7 @@ docker-compose up --build -d
 ### Dépendances
 
 | Dépendance | Version | Commentaire                                                  |
-| :--------- | ------: | ------------------------------------------------------------ |
+| :--------- | ------- | ------------------------------------------------------------ |
 | Angular    |      11 | Framework frontend écrit en TypeScript                                         |
 | Rxjs       |   6.6.0 | Librairie permettant de faciliter la gestion des évènements asynchrones en intégrant la programmation réactive |
 | TsLib      |   2.0.0 | Il s'agit d'une bibliothèque d'exécution pour TypeScript qui contient toutes les fonctions d'assistance TypeScript. |
