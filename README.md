@@ -112,7 +112,7 @@ npm run build:prod
 npm run test
 ```
 
-- Commande permettant d'executer les tests unitaires dans la pipeline d'intégration continue et de générer un rapport de test au format `juint` ainsi qu'un rapport de coverage au format `jacoco`, qui vont ensuite être interprêtés par l'outil d'analyse de qualité du code.
+- Commande permettant d'executer les tests unitaires dans la pipeline d'intégration continue et de générer un rapport de test au format `junit` ainsi qu'un rapport de coverage au format `jacoco`, qui vont ensuite être interprêtés par l'outil d'analyse de qualité du code.
 
 ```sh
 npm run test:ci
@@ -132,13 +132,13 @@ npm run e2e
 
 ### Outils de qualité du code
 
-- Commande pour formatter le code en utilisant le module Prettier et la configuration dans le fivhier `.prettierrc` 
+- Commande pour formater le code en utilisant le module Prettier et la configuration dans le fichier `.prettierrc` 
 
 ```sh
 npm run format
 ```
 
-- Commande permettant de valider que toutes les régles de formattage de code et bonnes pratiques définies dans le fichier `tslint.json` soient bien respectée et d'afficher les potentiels erreurs.
+- Commande permettant de valider que toutes les régles de formattage de code et bonnes pratiques définies dans le fichier `tslint.json` soient bien respectées et d'afficher les potentiels erreurs.
 
 ```sh
 npm run lint
@@ -152,7 +152,7 @@ npm run sonar
 
 ## Githooks avec Husky
 
-> Un hook est un script qui s’exécute automatiquement lorsqu’un événement particulier se produit dans un dépôt git. Les scripts se trouves dans le fichier `package.json`
+> Un hook est un script qui s’exécute automatiquement lorsqu’un événement particulier se produit dans un dépôt git. Les scripts se trouvent dans le fichier `package.json`
 
 - #### pre-commit (Ce hook se déclenche en premier avant même de saisir le message du commit)
 
