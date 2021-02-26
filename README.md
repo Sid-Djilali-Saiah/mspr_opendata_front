@@ -1,5 +1,5 @@
 
-# MSPR Recipe Front-end
+# Angular Frontend
 
 ## Pré-requis
 
