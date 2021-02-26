@@ -256,7 +256,7 @@ pipeline {
 > * De déployer notre application si l'environnement est la prod ou la préprod, sinon l'étape est ignorée. Nous utilisons la variable "ENV_NAME" pour sélectionner le bon fichier "docker-compose".
 > * À la fin de la pipeline, un mail récap est envoyé en indiquant si la pipeline est un succès ou un échec. Ce mail est accompagné des logs de la pipeline en pièce jointe.
 
-#### Le fonctionnement de notre intégration continue est le suivant :
+#### Le fonctionnement de notre intégration continue est le suivant
 * Lorsqu'on push un commit ou un tag, un webhook sur notre projet github va s'activer et informer Jenkins qu'une branche a été mis à jour (avec le commit) ou qu'un nouveau tag est disponible.
 * Lorsque le webhook indique à jenkins les changements sur la nouvelle branche, celui-ci va automatiquement exécuter la pipeline et vérifier si toutes les étapes passent.
 * Si on crée une Pull Request sur github, la dernière pipeline effectuée sur la branche sera automatiquement affiché dans la PR avec le statut de celui-ci : En cours, Succès ou Échec
