@@ -1,6 +1,26 @@
 
 # Angular Frontend
 
+### Sommaire :
+
+* [Pré-requis](#pré-requis)
+* [Mise en place de l'environnement de développement](#mise-en-place-de-lenvironnement-de-développement)
+* [Projet](#projet)
+  * [Angular CLI](#angular-cli)
+  * [Code scaffolding](#code-scaffolding)
+  * [Dépendances](#dépendances)
+  * [Commandes utiles](#commandes-utiles)
+  * [Tests Unitaires](#tests-unitaires)
+  * [Outils de qualité du code](#outils-de-qualité-du-code)
+  * [Intégration continue](#intégration-continue)
+  * [Exemple](#exemple)
+* [Githooks avec Husky](#githooks-avec-husky)
+  * [Pre-commit](#pre-commit-ce-hook-se-déclenche-en-premier-avant-même-de-saisir-le-message-du-commit)
+  * [Pre-push](#pre-push-ce-hook-se-déclenche-avant-lexécution-de-la-commande-git-push)
+  * [Contourner les hooks](#contourner-les-hooks)
+
+-----------------------------------------------------------------------------------------------------
+
 ## Pré-requis
 
 * Git
@@ -64,6 +84,18 @@ docker-compose up --build -d
 * L'Application est disponible à l'URL suivant : `http://localhost:4200`
 
 > **NB :** Les sources local sont liées à celle présente dans le container, du coup pas besoin de build de nouveau à chaque changement dans le code.
+
+## Projet
+
+Ce projet a été généré avec [Angular CLI](https://github.com/angular/angular-cli) version 11.0.1.
+
+### Angular CLI
+
+Pour plus d'informations à propos du Angular CLI utiliser `ng help` ou se rendre sur la documentation officielle disponible ici [Angular CLI Overview and Command Reference](https://angular.io/cli).
+
+### Code scaffolding
+
+Lancer la commande `ng generate component component-name` pour générer un nouveau composant. Vous pouvez aussi utiliser `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ### Dépendances
 
