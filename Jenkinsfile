@@ -1,3 +1,12 @@
+def getEnvName(branchName) {
+  if (branchName.startsWith("release-")) {
+    return 'prod';
+  } else if (branchName == "preprod") {
+    return 'preprod';
+  }
+  return "dev";
+}
+
 pipeline {
   agent none
   stages {
@@ -5,13 +14,12 @@ pipeline {
       agent any
       steps {
         script {
-          def scannerHome = tool 'SonarScanner';
           env.BRANCH_NAME = "${env.GIT_BRANCH.replaceFirst(/^.*\//, '')}"
           env.ENV_NAME = getEnvName(env.BRANCH_NAME)
         }
       }
     }
-    stage('Install') {
+    stage('Install Dependencies') {
       agent {
         docker { image 'node:lts-alpine' }
       }
@@ -48,6 +56,9 @@ pipeline {
         withSonarQubeEnv('SonarQube') {
           sh '$SONAR_HOME/bin/sonar-scanner'
         }
+        timeout(time: 5, unit: 'MINUTES') {  
+          waitForQualityGate abortPipeline: true  
+        }
       }
     }
     stage('Deploy') {
@@ -68,13 +79,4 @@ pipeline {
                body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}"
     }
   }
-}
-
-def getEnvName(branchName) {
-  if (branchName.startsWith("release-")) {
-    return 'prod';
-  } else if (branchName == "preprod") {
-    return 'preprod';
-  }
-  return "dev";
 }
