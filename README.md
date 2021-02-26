@@ -153,7 +153,7 @@ npm run sonar
 L’intégration continue de projet est géré avec une pipeline `jenkins` multibranche disponible sur l'url : http://nonstopintegration.ml:8080/
 
 * Le fichier `Jenkinsfile` nous permet de gérer cette pipeline : 
-```Jenkinsfile
+```java
 def getEnvName(branchName) {
   if (branchName.startsWith("release-")) {
     return 'prod';
@@ -170,13 +170,12 @@ pipeline {
       agent any
       steps {
         script {
-          def scannerHome = tool 'SonarScanner';
           env.BRANCH_NAME = "${env.GIT_BRANCH.replaceFirst(/^.*\//, '')}"
           env.ENV_NAME = getEnvName(env.BRANCH_NAME)
         }
       }
     }
-    stage('Install') {
+    stage('Install Dependencies') {
       agent {
         docker { image 'node:lts-alpine' }
       }
@@ -213,6 +212,9 @@ pipeline {
         withSonarQubeEnv('SonarQube') {
           sh '$SONAR_HOME/bin/sonar-scanner'
         }
+        timeout(time: 5, unit: 'MINUTES') {  
+          waitForQualityGate abortPipeline: true  
+        }
       }
     }
     stage('Deploy') {
@@ -237,22 +239,20 @@ pipeline {
 ```
 > Ce fichier **Jenkinsfile** permet de créer une pipeline déclarative dont les différentes étapes sont :
 >
-> * De set les variables d'environnements :
+> * De mettre en place les variables d'environnements :
 >   * `BRANCH_NAME` : Ici on retire le préfix "origin/" du nom de la  branche
 >   * `ENV_NAME` : On définit l'environnement (`prod`, `préprod` ou `dev`) en fonction du nom de la branche.
-> * De tester le build du projet : 
->   * A partir d'un docker créé avec l'image `maven:3.6.0-jdk-8-slim`
->   * En spécifiant l'option `-P${ENV_NAME}`
-> * D'exécuter les tests unitaire du projet et partager un rapport des résultats : 
->   * A partir d'un docker créé avec l'image `maven:3.6.0-jdk-8-slim`
->   * En spécifiant l'option `-P${ENV_NAME}`
+> * D'installer les dépendances du projet du projet : 
+>   * A partir d'un docker créé avec l'image `node:lts-alpine`
+> * D'exécuter les tests unitaire du projet et générer les rapports de tests et de coverage au bon format : 
+>   * A partir d'un docker créé avec l'image `node:lts-alpine`
+>   * En spécifiant l'option `npm run test:ci`
 > * D'analyser la qualité du code avec SonarQube : 
->   * A partir d'un docker créé avec l'image `maven:3.6.0-jdk-8-slim`
->   * En spécifiant l'option `-P${ENV_NAME}`
->   * withSonarQubeEnv nous permet d'exécuter l'analyse sur l'environnement
+>   * A partir d'un docker créé avec l'image `node:lts-alpine`
+>   * withSonarQubeEnv nous permet d'exécuter l'analyse sur l'environnement sonar en utilisant le sonar-scanner pour TypeScript.
 >   * waitForQualityGate nous permet d'attendre la réponse de sonar et ainsi d'indiquer à la pipeline si ce stage doit échouer ou non
-> * De déployer notre application si l'environnement est la prod ou la préprod, sinon l'étape n'est pas effectuée. Nous utilisons la variable "ENV_NAME" pour utiliser le bon fichier "docker-compose"
-> * À la fin de la pipeline, un mail récap est envoyé en indiquant si la pipeline est un succès ou un échec. Ce mail est accompagné des logs de la pipeline en pièce jointe
+> * De déployer notre application si l'environnement est la prod ou la préprod, sinon l'étape est ignorée. Nous utilisons la variable "ENV_NAME" pour sélectionner le bon fichier "docker-compose".
+> * À la fin de la pipeline, un mail récap est envoyé en indiquant si la pipeline est un succès ou un échec. Ce mail est accompagné des logs de la pipeline en pièce jointe.
 
 Le fonctionnement de notre intégration continue est le suivant :
 * Lorsqu'on push un commit ou un tag, un webhook sur notre projet github va s'activer et informer Jenkins qu'une branche a été mis à jour (avec le commit) ou qu'un nouveau tag est disponible.
@@ -260,9 +260,8 @@ Le fonctionnement de notre intégration continue est le suivant :
 * Si on crée une Pull Request sur github, la dernière pipeline effectuée sur la branche sera automatiquement affiché dans la PR avec le statut de celui-ci : En cours, Succès ou Échec
 * Un lien amenant au détail de la pipeline est également affichée et permet de consulter, en autre, les résultats des tests unitaires ou de l'analyse de sonarqube
 
-
 ### Exemple
-* Voici un exemple du projet installé sur un serveur : https://api-recipe.nonstopintegration.ml/swagger-ui.html
+* Voici un exemple du projet installé sur un serveur : https://recipe.nonstopintegration.ml
 
 
 ## Githooks avec Husky
