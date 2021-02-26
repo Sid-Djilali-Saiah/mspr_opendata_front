@@ -149,6 +149,121 @@ npm run lint
 ```sh
 npm run sonar
 ```
+### Intégration continue
+L’intégration continue de projet est géré avec une pipeline `jenkins` multibranche disponible sur l'url : http://nonstopintegration.ml:8080/
+
+* Le fichier `Jenkinsfile` nous permet de gérer cette pipeline : 
+```Jenkinsfile
+def getEnvName(branchName) {
+  if (branchName.startsWith("release-")) {
+    return 'prod';
+  } else if (branchName == "preprod") {
+    return 'preprod';
+  }
+  return "dev";
+}
+
+pipeline {
+  agent none
+  stages {
+    stage('Set environment') {
+      agent any
+      steps {
+        script {
+          def scannerHome = tool 'SonarScanner';
+          env.BRANCH_NAME = "${env.GIT_BRANCH.replaceFirst(/^.*\//, '')}"
+          env.ENV_NAME = getEnvName(env.BRANCH_NAME)
+        }
+      }
+    }
+    stage('Install') {
+      agent {
+        docker { image 'node:lts-alpine' }
+      }
+      environment { HOME="." }
+      steps { sh 'npm install' }
+    }
+    stage('Static code Analysis') {
+      agent {
+        docker { image 'node:lts-alpine' }
+      }
+      environment { HOME="." }
+      steps { sh 'npm run lint' }
+    }
+    stage('Unit tests') {
+      agent {
+        docker { image 'node:lts-alpine' }
+      }
+      environment { HOME="." }
+      steps { sh 'npm run test:ci' }
+    }
+    stage('Build') {
+      agent {
+        docker { image 'node:lts-alpine' }
+      }
+      environment { HOME="." }
+      steps { sh 'npm run build:prod' }
+    }
+    stage('Sonarqube') {
+      agent any
+      environment {
+        SONAR_HOME = tool 'SonarScanner'
+      }
+      steps {
+        withSonarQubeEnv('SonarQube') {
+          sh '$SONAR_HOME/bin/sonar-scanner'
+        }
+      }
+    }
+    stage('Deploy') {
+      agent any
+      when {
+        expression { ENV_NAME == 'preprod' || ENV_NAME == 'prod' }
+      }
+      steps {
+        sh 'docker-compose -p frontend_${ENV_NAME} -f docker-compose.${ENV_NAME}.yml up --build -d'
+      }
+    }
+  }
+  post {
+    always {
+      emailext to: "nonstopintegration@gmail.com",
+               subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}",
+               attachLog: true,
+               body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}"
+    }
+  }
+}
+```
+> Ce fichier **Jenkinsfile** permet de créer une pipeline déclarative dont les différentes étapes sont :
+>
+> * De set les variables d'environnements :
+>   * `BRANCH_NAME` : Ici on retire le préfix "origin/" du nom de la  branche
+>   * `ENV_NAME` : On définit l'environnement (`prod`, `préprod` ou `dev`) en fonction du nom de la branche.
+> * De tester le build du projet : 
+>   * A partir d'un docker créé avec l'image `maven:3.6.0-jdk-8-slim`
+>   * En spécifiant l'option `-P${ENV_NAME}`
+> * D'exécuter les tests unitaire du projet et partager un rapport des résultats : 
+>   * A partir d'un docker créé avec l'image `maven:3.6.0-jdk-8-slim`
+>   * En spécifiant l'option `-P${ENV_NAME}`
+> * D'analyser la qualité du code avec SonarQube : 
+>   * A partir d'un docker créé avec l'image `maven:3.6.0-jdk-8-slim`
+>   * En spécifiant l'option `-P${ENV_NAME}`
+>   * withSonarQubeEnv nous permet d'exécuter l'analyse sur l'environnement
+>   * waitForQualityGate nous permet d'attendre la réponse de sonar et ainsi d'indiquer à la pipeline si ce stage doit échouer ou non
+> * De déployer notre application si l'environnement est la prod ou la préprod, sinon l'étape n'est pas effectuée. Nous utilisons la variable "ENV_NAME" pour utiliser le bon fichier "docker-compose"
+> * À la fin de la pipeline, un mail récap est envoyé en indiquant si la pipeline est un succès ou un échec. Ce mail est accompagné des logs de la pipeline en pièce jointe
+
+Le fonctionnement de notre intégration continue est le suivant :
+* Lorsqu'on push un commit ou un tag, un webhook sur notre projet github va s'activer et informer Jenkins qu'une branche a été mis à jour (avec le commit) ou qu'un nouveau tag est disponible.
+* Lorsque le webhook indique à jenkins les changements sur la nouvelle branche, celui-ci va automatiquement exécuter la pipeline et vérifier si toutes les étapes passent.
+* Si on crée une Pull Request sur github, la dernière pipeline effectuée sur la branche sera automatiquement affiché dans la PR avec le statut de celui-ci : En cours, Succès ou Échec
+* Un lien amenant au détail de la pipeline est également affichée et permet de consulter, en autre, les résultats des tests unitaires ou de l'analyse de sonarqube
+
+
+### Exemple
+* Voici un exemple du projet installé sur un serveur : https://api-recipe.nonstopintegration.ml/swagger-ui.html
+
 
 ## Githooks avec Husky
 
