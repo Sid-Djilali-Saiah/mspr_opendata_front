@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeaderComponent should equal snapshot 1`] = `
+<app-header>
+  <mat-toolbar
+    class="mat-toolbar mat-primary mat-toolbar-single-row"
+    color="primary"
+  >
+    <span>
+      Recipe Book
+    </span>
+    <span
+      class="example-spacer"
+    />
+    <button
+      aria-label="Example icon-button with heart icon"
+      class="example-icon favorite-icon mat-focus-indicator mat-icon-button mat-button-base"
+      mat-icon-button=""
+    >
+      <span
+        class="mat-button-wrapper"
+      >
+        <span
+          class="material-icons"
+        >
+          cake
+        </span>
+      </span>
+      <span
+        class="mat-button-ripple mat-ripple mat-button-ripple-round"
+        matripple=""
+      />
+      <span
+        class="mat-button-focus-overlay"
+      />
+    </button>
+    <button
+      aria-label="Example icon-button with menu icon"
+      class="example-icon mat-focus-indicator mat-icon-button mat-button-base"
+      mat-icon-button=""
+    >
+      <span
+        class="mat-button-wrapper"
+      >
+        <mat-icon
+          aria-hidden="true"
+          class="mat-icon notranslate material-icons mat-icon-no-color"
+          data-mat-icon-type="font"
+          role="img"
+        >
+          import_contacts
+        </mat-icon>
+      </span>
+      <span
+        class="mat-button-ripple mat-ripple mat-button-ripple-round"
+        matripple=""
+      />
+      <span
+        class="mat-button-focus-overlay"
+      />
+    </button>
+  </mat-toolbar>
+</app-header>
+`;

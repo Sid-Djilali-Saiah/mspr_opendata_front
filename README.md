@@ -136,6 +136,12 @@ npm run build
 npm run build:prod
 ```
 
+### Documentation Compodoc
+- Run to generate the Documentation in default output folder documentation/, the local HTTP server is launched automatically at http://localhost:4201
+```shell
+npm run start:compodoc
+```
+
 ### Tests Unitaires
 
 - Commande pour lancer les tests unitaires en local, `ng test` pour executer les tests unitaires via [Jest](https://www.npmjs.com/package/@angular-builders/jest).

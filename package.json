@@ -14,7 +14,8 @@
     "lint": "ng lint",
     "format": "npx pretty-quick --staged",
     "sonar": "npx sonar-scanner",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "start:compodoc": "npx compodoc -p ./tsconfig.json -r 4201 -w -s -o --language fr-FR"
   },
   "private": true,
   "dependencies": {
@@ -38,6 +39,7 @@
     "@angular-devkit/build-angular": "~0.1100.1",
     "@angular/cli": "~11.0.1",
     "@angular/compiler-cli": "~11.0.0",
+    "@compodoc/compodoc": "^1.1.11",
     "@types/jest": "^26.0.20",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.1",

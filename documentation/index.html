@@ -1,0 +1,405 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>mspr-recipe-front documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	      <link rel="stylesheet" href="./styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="./" class="navbar-brand">mspr-recipe-front documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Saisissez un texte"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content getting-started">
+                   <div class="content-data">
+
+<h1 id="angular-frontend">Angular Frontend</h1>
+<h3 id="sommaire-">Sommaire :</h3>
+<ul>
+<li><a href="#pr%C3%A9-requis">Pré-requis</a></li>
+<li><a href="#mise-en-place-de-lenvironnement-de-d%C3%A9veloppement">Mise en place de l&#39;environnement de développement</a></li>
+<li><a href="#projet">Projet</a><ul>
+<li><a href="#angular-cli">Angular CLI</a></li>
+<li><a href="#code-scaffolding">Code scaffolding</a></li>
+<li><a href="#d%C3%A9pendances">Dépendances</a></li>
+<li><a href="#commandes-utiles">Commandes utiles</a></li>
+<li><a href="#tests-unitaires">Tests Unitaires</a></li>
+<li><a href="#outils-de-qualit%C3%A9-du-code">Outils de qualité du code</a></li>
+<li><a href="#int%C3%A9gration-continue">Intégration continue</a></li>
+<li><a href="#exemple">Exemple</a></li>
+</ul>
+</li>
+<li><a href="#githooks-avec-husky">Githooks avec Husky</a><ul>
+<li><a href="#pre-commit-ce-hook-se-d%C3%A9clenche-en-premier-avant-m%C3%AAme-de-saisir-le-message-du-commit">Pre-commit</a></li>
+<li><a href="#pre-push-ce-hook-se-d%C3%A9clenche-avant-lex%C3%A9cution-de-la-commande-git-push">Pre-push</a></li>
+<li><a href="#contourner-les-hooks">Contourner les hooks</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="pré-requis">Pré-requis</h2>
+<ul>
+<li>Git</li>
+<li>Docker et Docker Compose</li>
+</ul>
+<h2 id="mise-en-place-de-lenvironnement-de-développement">Mise en place de l&#39;environnement de développement</h2>
+<ul>
+<li>Afin de conteneuriser notre application, nous avons créé le  <code>Dockerfile</code>  suivant :<div><pre class="line-numbers"><code class="language-Dockerfile">FROM node:lts-alpine
+</code></pre></div></li>
+</ul>
+<p>WORKDIR /usr/app</p>
+<p>COPY ./package*.json ./</p>
+<p>RUN npm ci -qy</p>
+<p>COPY ./ .</p>
+<p>EXPOSE 4200</p>
+<p>CMD [&quot;npm&quot;, &quot;run&quot;, &quot;start:dev&quot;]</p>
+<div><pre class="line-numbers"><code class="language-none">&gt; Ce fichier  **Dockerfile**  permet de :
+&gt; * D&#39;utiliser une image node lts (Long Terme Support)
+&gt; * Récupérer du fichier `package.json` puis d&#39;installer des dépendances
+&gt; * Récupérer les sources et lancer l&#39;application en mode développement sur le port **4200** du container
+
+
+* On utilise ensuite le fichier  `docker-compose.yml`  (qui utilisera le  `Dockerfile`  pour build l&#39;application) :
+
+```yml
+version: &#39;3&#39;
+services:
+  client:
+    container_name: mspr-recipe-frontend
+    build:
+      context: .
+      dockerfile: dockerfiles/local/Dockerfile
+    volumes:
+      - ./:/usr/app
+      - /usr/app/node_modules
+    ports:
+      - 4200:4200</code></pre></div><blockquote>
+<p>Ce fichier <strong>docker-compose</strong> permet de :</p>
+<ul>
+<li>Pour le service <code>frontend</code><ul>
+<li>Construire un conteneur appelé <code>mspr-recipe-frontend</code> à partir du <strong>Dockerfile</strong> présent dans le dossier <code>./dockerfiles/local/</code></li>
+<li>Utiliser la racine du répertoire local comme <strong>volumes</strong> et le lier au source du container</li>
+<li>Rediriger le port <strong>4200</strong> du container vers le <strong>4200</strong> de la machine parent</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>Pour construire le container et le déployer en local</li>
+</ul>
+<div><pre class="line-numbers"><code class="language-sh">docker-compose up --build -d</code></pre></div><ul>
+<li>L&#39;Application est disponible à l&#39;URL suivant : <code>http://localhost:4200</code></li>
+</ul>
+<blockquote>
+<p><strong>NB :</strong> Les sources local sont liées à celle présente dans le container, du coup pas besoin de build de nouveau à chaque changement dans le code.</p>
+</blockquote>
+<h2 id="projet">Projet</h2>
+<p>Ce projet a été généré avec <a href="https://github.com/angular/angular-cli">Angular CLI</a> version 11.0.1.</p>
+<h3 id="angular-cli">Angular CLI</h3>
+<p>Pour plus d&#39;informations à propos du Angular CLI utiliser <code>ng help</code> ou se rendre sur la documentation officielle disponible ici <a href="https://angular.io/cli">Angular CLI Overview and Command Reference</a>.</p>
+<h3 id="code-scaffolding">Code scaffolding</h3>
+<p>Lancer la commande <code>ng generate component component-name</code> pour générer un nouveau composant. Vous pouvez aussi utiliser <code>ng generate directive|pipe|service|class|guard|interface|enum|module</code>.</p>
+<h3 id="dépendances">Dépendances</h3>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th align="left">Dépendance</th>
+<th>Version</th>
+<th>Commentaire</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Angular</td>
+<td>11</td>
+<td>Framework frontend écrit en TypeScript</td>
+</tr>
+<tr>
+<td align="left">Rxjs</td>
+<td>6.6.0</td>
+<td>Librairie permettant de faciliter la gestion des évènements asynchrones en intégrant la programmation réactive</td>
+</tr>
+<tr>
+<td align="left">TsLib</td>
+<td>2.0.0</td>
+<td>Il s&#39;agit d&#39;une bibliothèque d&#39;exécution pour TypeScript qui contient toutes les fonctions d&#39;assistance TypeScript.</td>
+</tr>
+<tr>
+<td align="left">Jest</td>
+<td>26.6.3</td>
+<td>Framework de tests unitaires pour JavaScript et TypeScript</td>
+</tr>
+<tr>
+<td align="left">Prettier</td>
+<td>2.2.1</td>
+<td>Permet de formater le code d&#39;un projet selon des règles spécifiques</td>
+</tr>
+<tr>
+<td align="left">TsLint</td>
+<td>6.1.0</td>
+<td>TSLint est un outil d&#39;analyse statique extensible qui vérifie le code TypeScript pour la lisibilité, la maintenabilité et les erreurs de fonctionnalité</td>
+</tr>
+<tr>
+<td align="left">Husky</td>
+<td>4.3.8</td>
+<td>Husky est une librairie permettant de faciliter la création et le partage des hooks au sein d’un projet</td>
+</tr>
+<tr>
+<td align="left">TypeScript</td>
+<td>4.0.2</td>
+<td>TypeScript est un langage de programmation libre et open source développé par Microsoft</td>
+</tr>
+</tbody>
+</table>
+<h3 id="commandes-utiles">Commandes utiles</h3>
+<ul>
+<li>Commande pour lancer l&#39;application en local sur la machine hôte</li>
+</ul>
+<div><pre class="line-numbers"><code class="language-sh">npm run start</code></pre></div><ul>
+<li>Commande pour lancer l&#39;application dans le conteneur docker de developement afin que la redirection du container vers l&#39;hôte fontionne</li>
+</ul>
+<div><pre class="line-numbers"><code class="language-sh">npm run start:dev</code></pre></div><ul>
+<li>Commande pour compiler les sources du projet pour l&#39;environement de dev</li>
+</ul>
+<div><pre class="line-numbers"><code class="language-sh">npm run build</code></pre></div><ul>
+<li>Commande pour compiler les sources du projet pour la production. Les artefacts de compilation seront stockés dans le répertoire <code>dist/</code>. Utilisez l&#39;option <code>--prod</code> pour l&#39;environnement de production.</li>
+</ul>
+<div><pre class="line-numbers"><code class="language-sh">npm run build:prod</code></pre></div><h3 id="tests-unitaires">Tests Unitaires</h3>
+<ul>
+<li>Commande pour lancer les tests unitaires en local, <code>ng test</code> pour executer les tests unitaires via <a href="https://www.npmjs.com/package/@angular-builders/jest">Jest</a>.</li>
+</ul>
+<div><pre class="line-numbers"><code class="language-sh">npm run test</code></pre></div><ul>
+<li>Commande permettant d&#39;executer les tests unitaires dans la pipeline d&#39;intégration continue et de générer un rapport de test au format <code>junit</code> ainsi qu&#39;un rapport de coverage au format <code>jacoco</code>, qui vont ensuite être interprêtés par l&#39;outil d&#39;analyse de qualité du code.</li>
+</ul>
+<div><pre class="line-numbers"><code class="language-sh">npm run test:ci</code></pre></div><ul>
+<li>Commande permettant de relancer automatique, pendant le developement, les tests sur un fichier qui vient d&#39;être modifié</li>
+</ul>
+<div><pre class="line-numbers"><code class="language-sh">npm run test:watch</code></pre></div><ul>
+<li>Commande permettant de lancer des tests end to end avec <a href="https://www.protractortest.org/#/">Protractor</a></li>
+</ul>
+<div><pre class="line-numbers"><code class="language-sh">npm run e2e</code></pre></div><h3 id="outils-de-qualité-du-code">Outils de qualité du code</h3>
+<ul>
+<li>Commande pour formater le code en utilisant le module Prettier et la configuration dans le fichier <code>.prettierrc</code> </li>
+</ul>
+<div><pre class="line-numbers"><code class="language-sh">npm run format</code></pre></div><ul>
+<li>Commande permettant de valider que toutes les régles de formattage de code et bonnes pratiques définies dans le fichier <code>tslint.json</code> soient bien respectées et d&#39;afficher les potentiels erreurs.</li>
+</ul>
+<div><pre class="line-numbers"><code class="language-sh">npm run lint</code></pre></div><ul>
+<li>Commande pour lancer l&#39;analyse de qualité du code en local, la configuration se trouve dans le fichier <code>sonar-projet.properties</code></li>
+</ul>
+<div><pre class="line-numbers"><code class="language-sh">npm run sonar</code></pre></div><h3 id="intégration-continue">Intégration continue</h3>
+<p>L’intégration continue de projet est géré avec une pipeline <code>jenkins</code> multibranche disponible sur l&#39;url : <a href="http://nonstopintegration.ml:8080/">http://nonstopintegration.ml:8080/</a></p>
+<ul>
+<li>Le fichier <code>Jenkinsfile</code> nous permet de gérer cette pipeline : <div><pre class="line-numbers"><code class="language-java">def getEnvName(branchName) {
+if (branchName.startsWith(&quot;release-&quot;)) {
+  return &#39;prod&#39;;
+} else if (branchName == &quot;preprod&quot;) {
+  return &#39;preprod&#39;;
+}
+return &quot;dev&quot;;
+}
+</code></pre></div></li>
+</ul>
+<p>pipeline {
+  agent none
+  stages {
+    stage(&#39;Set environment&#39;) {
+      agent any
+      steps {
+        script {
+          env.BRANCH_NAME = &quot;${env.GIT_BRANCH.replaceFirst(/^.*//, &#39;&#39;)}&quot;
+          env.ENV_NAME = getEnvName(env.BRANCH_NAME)
+        }
+      }
+    }
+    stage(&#39;Install Dependencies&#39;) {
+      agent {
+        docker { image &#39;node:lts-alpine&#39; }
+      }
+      environment { HOME=&quot;.&quot; }
+      steps { sh &#39;npm install&#39; }
+    }
+    stage(&#39;Static code Analysis&#39;) {
+      agent {
+        docker { image &#39;node:lts-alpine&#39; }
+      }
+      environment { HOME=&quot;.&quot; }
+      steps { sh &#39;npm run lint&#39; }
+    }
+    stage(&#39;Unit tests&#39;) {
+      agent {
+        docker { image &#39;node:lts-alpine&#39; }
+      }
+      environment { HOME=&quot;.&quot; }
+      steps { sh &#39;npm run test:ci&#39; }
+    }
+    stage(&#39;Build&#39;) {
+      agent {
+        docker { image &#39;node:lts-alpine&#39; }
+      }
+      environment { HOME=&quot;.&quot; }
+      steps { sh &#39;npm run build:prod&#39; }
+    }
+    stage(&#39;Sonarqube&#39;) {
+      agent any
+      environment {
+        SONAR_HOME = tool &#39;SonarScanner&#39;
+      }
+      steps {
+        withSonarQubeEnv(&#39;SonarQube&#39;) {
+          sh &#39;$SONAR_HOME/bin/sonar-scanner&#39;
+        }
+        timeout(time: 5, unit: &#39;MINUTES&#39;) {<br>          waitForQualityGate abortPipeline: true<br>        }
+      }
+    }
+    stage(&#39;Deploy&#39;) {
+      agent any
+      when {
+        expression { ENV_NAME == &#39;preprod&#39; || ENV_NAME == &#39;prod&#39; }
+      }
+      steps {
+        sh &#39;docker-compose -p frontend_${ENV_NAME} -f docker-compose.${ENV_NAME}.yml up --build -d&#39;
+      }
+    }
+  }
+  post {
+    always {
+      emailext to: &quot;<a href="mailto:nonstopintegration@gmail.com">nonstopintegration@gmail.com</a>&quot;,
+               subject: &quot;Jenkins Build ${currentBuild.currentResult}: <br>                         Job ${env.JOB_NAME}&quot;,
+               attachLog: true,
+               body: &quot;${currentBuild.currentResult}: Job ${env.JOB_NAME} <br>                      build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}&quot;
+    }
+  }
+}</p>
+<div><pre class="line-numbers"><code class="language-none">&gt; Ce fichier **Jenkinsfile** permet de créer une pipeline déclarative dont les différentes étapes sont :
+&gt;
+&gt; * De mettre en place les variables d&#39;environnements :
+&gt;   * `BRANCH_NAME` : Ici on retire le préfix &quot;origin/&quot; du nom de la  branche
+&gt;   * `ENV_NAME` : On définit l&#39;environnement (`prod`, `préprod` ou `dev`) en fonction du nom de la branche.
+&gt; * D&#39;installer les dépendances du projet du projet : 
+&gt;   * A partir d&#39;un docker créé avec l&#39;image `node:lts-alpine`
+&gt; * D&#39;exécuter les tests unitaire du projet et générer les rapports de tests et de coverage au bon format : 
+&gt;   * A partir d&#39;un docker créé avec l&#39;image `node:lts-alpine`
+&gt;   * En spécifiant l&#39;option `npm run test:ci`
+&gt; * D&#39;analyser la qualité du code avec SonarQube : 
+&gt;   * A partir d&#39;un docker créé avec l&#39;image `node:lts-alpine`
+&gt;   * withSonarQubeEnv nous permet d&#39;exécuter l&#39;analyse sur l&#39;environnement sonar en utilisant le sonar-scanner pour TypeScript.
+&gt;   * waitForQualityGate nous permet d&#39;attendre la réponse de sonar et ainsi d&#39;indiquer à la pipeline si ce stage doit échouer ou non
+&gt; * De déployer notre application si l&#39;environnement est la prod ou la préprod, sinon l&#39;étape est ignorée. Nous utilisons la variable &quot;ENV_NAME&quot; pour sélectionner le bon fichier &quot;docker-compose&quot;.
+&gt; * À la fin de la pipeline, un mail récap est envoyé en indiquant si la pipeline est un succès ou un échec. Ce mail est accompagné des logs de la pipeline en pièce jointe.
+
+#### Le fonctionnement de notre intégration continue est le suivant
+* Lorsqu&#39;on push un commit ou un tag, un webhook sur notre projet github va s&#39;activer et informer Jenkins qu&#39;une branche a été mis à jour (avec le commit) ou qu&#39;un nouveau tag est disponible.
+* Lorsque le webhook indique à jenkins les changements sur la nouvelle branche, celui-ci va automatiquement exécuter la pipeline et vérifier si toutes les étapes passent.
+* Si on crée une Pull Request sur github, la dernière pipeline effectuée sur la branche sera automatiquement affiché dans la PR avec le statut de celui-ci : En cours, Succès ou Échec
+* Un lien amenant au détail de la pipeline est également affichée et permet de consulter, en autre, les résultats des tests unitaires ou de l&#39;analyse de sonarqube
+
+### Exemple
+* Voici un exemple du projet installé sur un serveur : https://recipe.nonstopintegration.ml
+
+
+## Githooks avec Husky
+
+&gt; Un hook est un script qui s’exécute automatiquement lorsqu’un événement particulier se produit dans un dépôt git. Les scripts se trouvent dans le fichier `package.json`
+
+#### pre-commit (Ce hook se déclenche en premier avant même de saisir le message du commit)
+
+  ```sh
+    npm run format &amp;&amp; npm run lint</code></pre></div><blockquote>
+<p>Formate le code à l&#39;aide de prettier puis lance un linter sur le code afin de vérifier toute erreur potentiel avant de valider le commit</p>
+</blockquote>
+<h4 id="pre-push-ce-hook-se-déclenche-avant-lexécution-de-la-commande-git-push">pre-push (Ce hook se déclenche avant l’exécution de la commande git push)</h4>
+<div><pre class="line-numbers"><code class="language-sh">     npm run test &amp;&amp; npm run build</code></pre></div><blockquote>
+<p>Lance les tests utitaires puis une compilation du projet et vérifie que les deux réussissent avec d&#39;autoriser le push</p>
+</blockquote>
+<h4 id="contourner-les-hooks">Contourner les hooks</h4>
+<blockquote>
+<p>Si besoin il est possible de contourner l’utilisation des hooks via l’option <code>--no-verify</code></p>
+</blockquote>
+<p><strong>NB : Cette option n&#39;est à utiliser que lorsque cela est nécessaire.</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">Aucun résultat matchant "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="./js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="./js/menu-wc.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+       <script src="./js/libs/zepto.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

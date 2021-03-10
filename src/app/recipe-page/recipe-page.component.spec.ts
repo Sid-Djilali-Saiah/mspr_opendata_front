@@ -35,4 +35,8 @@ describe('RecipePageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should equal snapshot', () => {
+    expect(fixture).toMatchSnapshot();
+  });
 });
