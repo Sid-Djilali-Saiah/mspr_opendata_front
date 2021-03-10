@@ -1,5 +1,25 @@
 
-# MSPR Recipe Front-end
+# Angular Frontend
+
+### Sommaire :
+
+* [Pré-requis](#pré-requis)
+* [Mise en place de l'environnement de développement](#mise-en-place-de-lenvironnement-de-développement)
+* [Projet](#projet)
+  * [Angular CLI](#angular-cli)
+  * [Code scaffolding](#code-scaffolding)
+  * [Dépendances](#dépendances)
+  * [Commandes utiles](#commandes-utiles)
+  * [Tests Unitaires](#tests-unitaires)
+  * [Outils de qualité du code](#outils-de-qualité-du-code)
+  * [Intégration continue](#intégration-continue)
+  * [Exemple](#exemple)
+* [Githooks avec Husky](#githooks-avec-husky)
+  * [Pre-commit](#pre-commit-ce-hook-se-déclenche-en-premier-avant-même-de-saisir-le-message-du-commit)
+  * [Pre-push](#pre-push-ce-hook-se-déclenche-avant-lexécution-de-la-commande-git-push)
+  * [Contourner les hooks](#contourner-les-hooks)
+
+-----------------------------------------------------------------------------------------------------
 
 ## Pré-requis
 
@@ -65,20 +85,32 @@ docker-compose up --build -d
 
 > **NB :** Les sources local sont liées à celle présente dans le container, du coup pas besoin de build de nouveau à chaque changement dans le code.
 
+## Projet
+
+Ce projet a été généré avec [Angular CLI](https://github.com/angular/angular-cli) version 11.0.1.
+
+### Angular CLI
+
+Pour plus d'informations à propos du Angular CLI utiliser `ng help` ou se rendre sur la documentation officielle disponible ici [Angular CLI Overview and Command Reference](https://angular.io/cli).
+
+### Code scaffolding
+
+Lancer la commande `ng generate component component-name` pour générer un nouveau composant. Vous pouvez aussi utiliser `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
 ### Dépendances
 
 | Dépendance | Version | Commentaire                                                  |
-| :--------- | ------: | ------------------------------------------------------------ |
-| Angular    |      11 | Framework typescript                                         |
-| rxjs       |   6.6.0 | librairie permettant de faciliter la gestion des évènements asynchrones |
-| tslib      |   2.0.0 | Il s'agit d'une bibliothèque d'exécution pour TypeScript qui contient toutes les fonctions d'assistance TypeScript. |
-| jest       |  26.6.3 | Framework de test javascript                                 |
-| prettier   |   2.2.1 | Permet de formater le code d'un projet selon des règles spécifiques |
-| tslint     |   6.1.0 | TSLint est un outil d'analyse statique extensible qui vérifie le code TypeScript pour la lisibilité, la maintenabilité et les erreurs de fonctionnalité |
-| husky      |   4.3.8 | Husky est une librairie permettant de faciliter la création et le partage des hooks au sein d’un projet |
-| typescript |   4.0.2 | TypeScript est un langage de programmation libre et open source développé par Microsoft |
+| :--------- | ------- | ------------------------------------------------------------ |
+| Angular    |      11 | Framework frontend écrit en TypeScript                                         |
+| Rxjs       |   6.6.0 | Librairie permettant de faciliter la gestion des évènements asynchrones en intégrant la programmation réactive |
+| TsLib      |   2.0.0 | Il s'agit d'une bibliothèque d'exécution pour TypeScript qui contient toutes les fonctions d'assistance TypeScript. |
+| Jest       |  26.6.3 | Framework de tests unitaires pour JavaScript et TypeScript                                |
+| Prettier   |   2.2.1 | Permet de formater le code d'un projet selon des règles spécifiques |
+| TsLint     |   6.1.0 | TSLint est un outil d'analyse statique extensible qui vérifie le code TypeScript pour la lisibilité, la maintenabilité et les erreurs de fonctionnalité |
+| Husky      |   4.3.8 | Husky est une librairie permettant de faciliter la création et le partage des hooks au sein d’un projet |
+| TypeScript |   4.0.2 | TypeScript est un langage de programmation libre et open source développé par Microsoft |
 
-### Commande utiles
+### Commandes utiles
 
 - Commande pour lancer l'application en local sur la machine hôte
 
@@ -149,7 +181,9 @@ npm run lint
 ```sh
 npm run sonar
 ```
+
 ### Intégration continue
+
 L’intégration continue de projet est géré avec une pipeline `jenkins` multibranche disponible sur l'url : http://nonstopintegration.ml:8080/
 
 * Le fichier `Jenkinsfile` nous permet de gérer cette pipeline : 
@@ -230,9 +264,11 @@ pipeline {
   post {
     always {
       emailext to: "nonstopintegration@gmail.com",
-               subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}",
+               subject: "Jenkins Build ${currentBuild.currentResult}: \
+                         Job ${env.JOB_NAME}",
                attachLog: true,
-               body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}"
+               body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} \
+                      build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}"
     }
   }
 }
@@ -254,7 +290,7 @@ pipeline {
 > * De déployer notre application si l'environnement est la prod ou la préprod, sinon l'étape est ignorée. Nous utilisons la variable "ENV_NAME" pour sélectionner le bon fichier "docker-compose".
 > * À la fin de la pipeline, un mail récap est envoyé en indiquant si la pipeline est un succès ou un échec. Ce mail est accompagné des logs de la pipeline en pièce jointe.
 
-Le fonctionnement de notre intégration continue est le suivant :
+#### Le fonctionnement de notre intégration continue est le suivant
 * Lorsqu'on push un commit ou un tag, un webhook sur notre projet github va s'activer et informer Jenkins qu'une branche a été mis à jour (avec le commit) ou qu'un nouveau tag est disponible.
 * Lorsque le webhook indique à jenkins les changements sur la nouvelle branche, celui-ci va automatiquement exécuter la pipeline et vérifier si toutes les étapes passent.
 * Si on crée une Pull Request sur github, la dernière pipeline effectuée sur la branche sera automatiquement affiché dans la PR avec le statut de celui-ci : En cours, Succès ou Échec
@@ -268,24 +304,24 @@ Le fonctionnement de notre intégration continue est le suivant :
 
 > Un hook est un script qui s’exécute automatiquement lorsqu’un événement particulier se produit dans un dépôt git. Les scripts se trouvent dans le fichier `package.json`
 
-- #### pre-commit (Ce hook se déclenche en premier avant même de saisir le message du commit)
+#### pre-commit (Ce hook se déclenche en premier avant même de saisir le message du commit)
 
   ```sh
     npm run format && npm run lint
   ```
 
-  > Formate le code à l'aide de prettier puis lance un linter sur le code afin de vérifier toute erreur potentiel avant de valider le commit
+> Formate le code à l'aide de prettier puis lance un linter sur le code afin de vérifier toute erreur potentiel avant de valider le commit
 
-- #### pre-push (Ce hook se déclenche avant l’exécution de la commande git push)
+#### pre-push (Ce hook se déclenche avant l’exécution de la commande git push)
 
   ```sh
      npm run test && npm run build
   ```
 
-  > Lance les tests utitaires puis une compilation du projet et vérifie que les deux réussissent avec d'autoriser le push
+> Lance les tests utitaires puis une compilation du projet et vérifie que les deux réussissent avec d'autoriser le push
 
-- #### Contourner les hooks
+#### Contourner les hooks
 
-  Si besoin il est possible de contourner l’utilisation des hooks via l’option `--no-verify`
+> Si besoin il est possible de contourner l’utilisation des hooks via l’option `--no-verify`
 
-  **NB : Cette option n'est à utiliser que lorsque cela est nécessaire.**
+**NB : Cette option n'est à utiliser que lorsque cela est nécessaire.**
