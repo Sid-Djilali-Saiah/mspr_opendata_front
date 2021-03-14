@@ -171,9 +171,20 @@ npm run e2e
 ### Testes de Non Régression
 
 > Les tests par "Snapshot" est un très bon outils afin de s'assurer que l'UI ne change pas de façon inattendu.
+> * Un test par "Snapshot"  pour une application mobile affiche un composant UI, prend un "Snapshot" et le compare avec le "Snapshot" de référence stockés pour le test en question.
+> * Le test échoue si les deux `Snapshot` sont différents : soit le changement n'est pas souhaité, soit la capture de référence doit être mise à jour avec la nouvelle version du composant UI.
 
-* Un test par "Snapshot"  pour une application mobile affiche un composant UI, prend un "Snapshot" et le compare avec le "Snapshot" de référence stockés pour le test en question.
-* Le test échoue si les deux `Snapshot` sont différents : soit le changement n'est pas souhaité, soit la capture de référence doit être mise à jour avec la nouvelle version du composant UI.
+- Pour générer un `snapshot` pour un composant il suffit d'ajouter le code ci-dessous au fichier de test `.spec.ts` :
+```typescript
+  it('should equal snapshot', () => {
+      expect(fixture).toMatchSnapshot();
+    });
+```
+
+- Commande permettant de mettre les snapshots de tests
+```shell
+npm run test:update
+```
 
 **TODO : Parler des commandes npm run test:update pour update les snapshots**
 
