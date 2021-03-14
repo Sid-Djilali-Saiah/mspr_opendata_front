@@ -11,6 +11,7 @@
   * [Dépendances](#dépendances)
   * [Commandes utiles](#commandes-utiles)
   * [Tests Unitaires](#tests-unitaires)
+  * [Tests de non-régression](#tests-de-non-régression)
   * [Outils de qualité du code](#outils-de-qualité-du-code)
   * [Intégration continue](#intégration-continue)
   * [Exemple](#exemple)
@@ -168,7 +169,7 @@ npm run test:watch
 npm run e2e
 ```
 
-### Testes de Non Régression
+### Tests de Non Régression
 
 > Les tests par "Snapshot" est un très bon outils afin de s'assurer que l'UI ne change pas de façon inattendu.
 > * Un test par "Snapshot"  pour une application mobile affiche un composant UI, prend un "Snapshot" et le compare avec le "Snapshot" de référence stockés pour le test en question.
