@@ -187,9 +187,6 @@ npm run e2e
 npm run test:update
 ```
 
-**TODO : Parler des commandes npm run test:update pour update les snapshots**
-
-
 ### Outils de qualité du code
 
 - Commande pour formater le code en utilisant le module Prettier et la configuration dans le fichier `.prettierrc` 
