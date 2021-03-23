@@ -2,10 +2,11 @@
 
 exports[`OpenDataComponent should equal snapshot 1`] = `
 <app-recipe-page
-  recipeService={[Function RecipeApiService]}
-  recipes$={[Function Observable]}
+  afuConfig={[Function Object]}
+  data$={[Function Observable]}
+  openDataService={[Function OpenDataService]}
   selectedOptions={[Function Array]}
 >
-
+  
 </app-recipe-page>
 `;

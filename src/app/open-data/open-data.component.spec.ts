@@ -7,8 +7,9 @@ import { FormsModule } from "@angular/forms";
 import {OpenDataService} from "../core/services/open-data.service";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { AngularFileUploaderModule } from 'angular-file-uploader';
 
-describe('RecipePageComponent', () => {
+describe('OpenDataComponent', () => {
   let component: OpenDataComponent;
   let fixture: ComponentFixture<OpenDataComponent>;
 
@@ -19,6 +20,7 @@ describe('RecipePageComponent', () => {
         RouterTestingModule.withRoutes([]),
         MaterialModule,
         FormsModule,
+        AngularFileUploaderModule,
         HttpClientTestingModule,
         BrowserAnimationsModule
       ],
