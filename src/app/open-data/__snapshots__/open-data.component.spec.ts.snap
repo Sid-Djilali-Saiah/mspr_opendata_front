@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OpenDataComponent should equal snapshot 1`] = `
+<app-recipe-page
+  afuConfig={[Function Object]}
+  data$={[Function Observable]}
+  openDataService={[Function OpenDataService]}
+  selectedOptions={[Function Array]}
+>
+  
+</app-recipe-page>
+`;

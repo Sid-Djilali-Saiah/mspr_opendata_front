@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { RecipePageComponent } from './recipe-page/recipe-page.component';
+import { OpenDataComponent } from './open-data/open-data.component';
 
 const routes: Routes = [
   {
     path: '**',
-    component: RecipePageComponent,
+    component: OpenDataComponent,
   },
 ];
 
