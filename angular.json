@@ -1,9 +1,9 @@
-{
+ {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "mspr-recipe-front": {
+    "mspr-opendata-front": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/mspr-recipe-front",
+            "outputPath": "dist/mspr-opendata-front",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -38,20 +38,20 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "namedChunks": false,
+              "namedChunks": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
                 }
               ]
             }
@@ -60,18 +60,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "mspr-recipe-front:build"
+            "browserTarget": "mspr-opendata-front:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "mspr-recipe-front:build:production"
+              "browserTarget": "mspr-opendata-front:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "mspr-recipe-front:build"
+            "browserTarget": "mspr-opendata-front:build"
           }
         },
         "test": {
@@ -99,16 +99,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "mspr-recipe-front:serve"
+            "devServerTarget": "mspr-opendata-front:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "mspr-recipe-front:serve:production"
+              "devServerTarget": "mspr-opendata-front:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "mspr-recipe-front"
+  "defaultProject": "mspr-opendata-front"
 }
