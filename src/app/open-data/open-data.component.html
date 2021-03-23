@@ -1,0 +1,25 @@
+<div class="app-container" *ngIf="data$ | async as recipesList">
+  <mat-card class='mat-elevation-z2'>
+    <h2 class='mat-h1'>Import Data</h2>
+    <angular-file-uploader
+      [config]="afuConfig"
+      [resetUpload]='true'
+    >
+    </angular-file-uploader>
+  </mat-card>
+  <mat-card class='mat-elevation-z2' style='margin-top: 30px'>
+    <h2 class='mat-h1'>Uploaded Data</h2>
+    <mat-divider></mat-divider>
+    <mat-selection-list multiple [(ngModel)]="selectedOptions">
+      <mat-list-option *ngFor="let recipe of recipesList" [value]="recipe.id">
+        {{ recipe.name }}
+      </mat-list-option>
+    </mat-selection-list>
+    <mat-divider></mat-divider>
+    <div class="button-container">
+      <button mat-stroked-button color="primary" [disabled]="selectedOptions.length <= 0" (click)="download()">
+        Download
+      </button>
+    </div>
+  </mat-card>
+</div>

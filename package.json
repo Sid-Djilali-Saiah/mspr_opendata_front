@@ -1,5 +1,5 @@
 {
-  "name": "mspr-recipe-front",
+  "name": "mspr-opendata-front",
   "version": "1.3.0",
   "scripts": {
     "ng": "ng",
@@ -30,6 +30,9 @@
     "@angular/platform-browser-dynamic": "~11.0.0",
     "@angular/router": "~11.0.0",
     "@ngneat/until-destroy": "^8.0.4",
+    "angular-file-uploader": "^7.0.3",
+    "angular-material-fileupload": "^3.0.2",
+    "mat-file-upload": "^11.1.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

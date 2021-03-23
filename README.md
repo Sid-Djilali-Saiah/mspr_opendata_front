@@ -57,7 +57,7 @@ CMD ["npm", "run", "start:dev"]
 version: '3'
 services:
   client:
-    container_name: mspr-recipe-frontend
+    container_name: mspr-opendata-frontend
     build:
       context: .
       dockerfile: dockerfiles/local/Dockerfile
@@ -71,7 +71,7 @@ services:
 > Ce fichier **docker-compose** permet de :
 >
 > * Pour le service `frontend`
->   * Construire un conteneur appelé `mspr-recipe-frontend` à partir du **Dockerfile** présent dans le dossier `./dockerfiles/local/`
+>   * Construire un conteneur appelé `mspr-opendata-frontend` à partir du **Dockerfile** présent dans le dossier `./dockerfiles/local/`
 >   * Utiliser la racine du répertoire local comme **volumes** et le lier au source du container
 >   * Rediriger le port **4200** du container vers le **4200** de la machine parent
 

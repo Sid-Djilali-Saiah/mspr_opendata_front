@@ -19,9 +19,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'mspr-recipe-front'`, () => {
+  it(`should have as title 'open-data'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('mspr-recipe-front');
+    expect(app.title).toEqual('open-data');
   });
 });
