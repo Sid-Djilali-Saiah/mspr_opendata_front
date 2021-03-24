@@ -322,7 +322,7 @@ pipeline {
 * Un lien amenant au détail de la pipeline est également affichée et permet de consulter, en autre, les résultats des tests unitaires ou de l'analyse de sonarqube
 
 ### Exemple
-* Voici un exemple du projet installé sur un serveur : https://recipe.nonstopintegration.ml
+* Voici un exemple du projet installé sur un serveur : https://opendata.nonstopintegration.ml
 
 
 ## Githooks avec Husky
